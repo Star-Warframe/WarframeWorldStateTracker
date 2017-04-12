@@ -1,0 +1,51 @@
+﻿High priority:
+-- Look up ASP.NET to maybe turn this into a web app
+  -- Kinda sorta in-progress
+
+-- Modify getters for Alert/Invasion/etc. properties to map things such as SolNodes/missionTypes/etc. where applicable
+  -- maybe for things I map have r_<var> for the raw data and <var> for prettified data?
+  -- for Invasion Tuples, maybe make a new Tuple<string, int> with the mapped name as the string component?
+
+-- Might as well make a mapper for all the .json things in data folder
+
+-- https://msdn.microsoft.com/en-us/library/system.io.filesystemwatcher.aspx for updating mappers when a JSON file gets changed?
+
+?? (Ongoing) Check PVP Challenges for consistency of numbers and add new types
+
+Low priority:
+-- Re-learn delegates and events and stuff and allow the button press to refresh the worldState in both windows
+
+-- Maybe think about refactoring the object lists to HashMap or something that can both ignore duplicates upon WorldState refresh, add new things when relevant, and remove old/expired things
+  -- Would also make things easier for notifications
+
+-- Notifications too, maybe
+
+-- Refactor mappers to be a single class, maybe
+
+-- convert m_messages in Event.cs to a Dictionary maybe
+
+Done:
+xx Add Stalkerlyte data structure
+xx Figure out how to populate the form on comboBox1 changes (to actually get data into a visible state)
+xx Invasion count/goal in ToString() needs % complete formatting
+xx Grab aliasfalse's Warframe data (SolNode matcher and whatnot) to map stuff to readable stuff (stole some other JSON stuff too)
+xx add ToString() method for all classes maybe? just so I can get the data structures printed out and check for bugs/missing stuff
+ xx IN PROGRESS todo: complete formatting and implement toString() for all classes that inherit WorldStateObject
+xx actually add crap to the UI
+xx Hook UI things up to data changes
+xx Surround mapper initializers with try/catches (see MapResource.cs) to fix [alerts, Alerts] bug (still don't know why JSON breaking caused the ComboBox datasource to break too ¯\_(ツ)_/¯)
+xx Set up a timing system to auto-refresh the WorldState every <arbitrary amount of time>
+xx Figure out how how to deal with capital letters in the JSON files (may need to convert pathnames in the JSON files to lowercase and convert pathnames in the item classes to lower as well :/)
+  xx Change all pathnames to lower-case but leave the item names capitalized
+xx Added functionality to grab PS4/XB1 worldStates for basically no reason
+xx Split up Parser and UI into different projects
+xx Figure out how to resolve the issue of the JSON files not being brought along with code
+  xx Done, fix is at the very bottom of WarframeWorldStateWeb.csproj
+  xx Works on a local level at least
+
+In limbo:
+?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround
+  not sure if necessary, plus I'll replace my languages.json when there's an update
+
+
+Note to self: Delete %LocalAppData%\Apps\2.0 to fix ClickOnce being screwy

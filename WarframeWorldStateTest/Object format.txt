@@ -1,0 +1,297 @@
+﻿May not be accurate
+
+Event: list of objects
+	_id: object
+		$oid: string
+	Messages: list of objects
+		LanguageCode: string
+		Message: string
+	Prop: string (url)
+	Date: object
+		$date: object
+			$numberLong: long
+	ImageUrl: string (url)
+	Priority: bool
+	MobileOnly: bool
+
+Goal: list (empty for now)
+
+Alert: list of objects
+	_id: object
+		$oid: string
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong: long
+	MissionInfo: object
+		missionType: string
+		faction: string
+		location: string (SolNode###)
+		levelOverride: string (path)
+		enemySpec: string (path)
+		extraEnemySpec: string (path)
+		minEnemyLevel: int
+		maxEnemyLevel: int
+		difficulty: double (or float, idk)
+		seed: int
+		maxWaveNum: int
+		missionReward: object
+			credits: int
+			items: list 
+				of strings
+			countedItems: list of objects
+				ItemType: string (path)
+				ItemCount: int
+			probablysomemorestuff: other
+
+Sorties: list of objects
+	_id: object
+		$oid: string
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong: long
+	Reward: string (path)
+	ExtraDrops: list (empty)
+	Seed: int
+	Variants: list of objects
+		bossIndex: int
+		regionIndex: int
+		missionIndex: int
+		modifierIndex: 5
+		node: string (SolNode###)
+		tileset: string
+
+SyndicateMissions: list of objects
+	_id: object
+		$oid: string
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong: long
+	Tag: string (syndicate name)
+	Seed: int
+	Nodes: list 
+		of strings
+
+ActiveMissions (Fissures): list of objects
+	_id: object
+		$oid: string
+	Region: int
+	Seed: int
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong: long
+	Node: string (SolNode###)
+	Modifier: string (VoidT[1-4])
+
+GlobalUpgrade (whatever that means....): list (empty)
+
+FlashSales: list of ojbects
+	TypeName: string (path)
+	StartDate: object
+		$date: object
+			$numberLong: long
+	EndDate: object
+		$date: object
+			$numberLong: long
+	Featured: bool
+	Popular: bool
+	BannerIndex: int
+	Discount: int
+	RegularOverride: int
+	PremiumOverride: int
+	BogoBuy: int
+	BogoGet: int
+
+Invasions: list of objects
+	_id: object
+		$oid: string
+	Faction: string
+	Node: string (SolNode###)
+	Count: int
+	Goal: int
+	LocTag: string (path)
+	Completed: bool
+	AttackerReward: object
+		countedItems: list of objects
+			ItemType: string (path)
+			ItemCount: int
+	AttackerMissionInfo: object
+		seed: int
+		faction: string
+	DefenderReward: object
+		countedItems: list of items
+			ItemType: string (path)
+			ItemCount: int
+	DefenderMissionInfo: object
+		seed: int
+		faction: string
+	Activation: object
+		$date: object
+			$numberLong: long
+
+HubEvents (whatever that means....): list (empty)
+
+NodeOverrides: list of objects
+	_id: object
+		$oid: string
+	Node: string
+	Hide: bool
+
+BadlandNodes (dark sectors): list of objects
+	_id: object
+		$oid: string
+	DefenderInfo: object
+		CreditsTaxRate: int
+		MemberCreditsTaxRate: int
+		ItemsTaxRate: int
+		MemberItemsTaxRate: int
+		TaxChangeAllowedTime: object
+			sec: long
+			usec: long
+		IsAlliance: bool
+		Id: object
+			$oid: string
+		Name: string
+		StrengthRemaining: int
+		MaxStrength: int
+		DeploymentActivationTime: object
+			sec: long
+			usec: long
+		RailType: string (path)
+		MOTD: string
+		DeployerName: string
+		DeployerClan: string
+		RailHealReserve: int
+		HealRate: double (or float)
+		DamagePerMission: int
+		BattlePayReserve: int
+		MissionBattlePay: int
+		BattlePaySetBy: string
+		BattlePaySetByClan: string
+		TaxLastChangedBy: string
+		TaxLastChangedByClan: string
+	History: list of objects
+		Def: string
+		DefId: object
+			$oid: string
+		DefAli: bool
+		Att: string
+		AttId: object
+			$oid: string
+		AttAli: bool
+		WinId: object
+			$oid: string
+		Start: object
+			sec: long
+			usec: long
+		End: object
+			sec: long
+			usec: long
+	Node: string (ClanNode##)
+	PostConflictCooldown: object
+		$date: object
+			$numberLong: long
+
+VoidTraders (i.e. the one void trader....): list of objects
+	_id: object
+		$oid: string
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong: long
+	Character: string
+	Node: string (<Planet>HUB)
+	Manifest: list of objects
+		ItemType: string (path)
+		PrimePrice: int
+		RegularPrice: int
+
+PrimeAccessAvailability: object
+	State: string
+
+PrimeVaultAvailabilities: list of objects
+	State: string (NONE, or COMING_SOON)
+
+DailyDeals (Darvo I assume in relay): list of objects
+	StoreItem: string (path)
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong: long
+	Discount: int
+	OriginalPrice: int
+	SalePrice: int
+	AmountTotal: int
+	AmountSold: int
+
+LibraryInfo (??? Simaris?): object
+	LastCompletedTargetType: string (path)
+
+PVPChallengeInstances: list of objects
+	_id: object
+		$oid: string
+	challengeTypeRefID: string (path)
+	startDate: object
+		$date: object
+			$numberLong: long
+	endDate: object
+		$date: object
+			$numberLong: long
+	params: list of objects
+		n: string
+		v: int
+	isGenerated: bool
+	PVPMode: string
+	subChallenges: list of objects
+		$oid: string
+	Category: string
+
+PersistentEnemies (assumed Stalkerlytes): list of objects
+	_id: object
+		$oid: string
+	AgentType: string (path)
+	LocTag: string (path)
+	Icon: image (path)
+	Rank: int
+	HealthPercent: double/float
+	FleeDamage: int
+	Region: int
+	LastDiscoveredLocation: string (SolNode###)
+	LastDiscoveredTime: object
+		$date: object object
+			$numberLong: long (string form)
+	Discovered: bool
+	UseTicketing: bool
+
+PVPAlternativeModes: list of objects
+	TargetMode: string
+	TitleLoc: string (path)
+	DescriptionLoc: string (path)
+	DisableEnergyPickups: bool
+	DisableEnergySurge: bool
+	DisableAmmoPickups: bool
+	ForcedLoadouts: list of objects
+		WeaponOverrides: list of objects
+			Override: bool
+			Resource: string (path)
+			OriginalVersion: string (path)
+
+PVPActiveTournaments: list (empty)
+
+ProjectPct (no idea): list 
+	of doubles (or floats)

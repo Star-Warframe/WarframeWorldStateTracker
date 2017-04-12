@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "WarframeWorldStateTest\Parser.csproj", "{180CE58C-7792-4CDE-8366-FAEAB1E7CEE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "WorldStateWeb\Web.csproj", "{FDD02192-A792-4D91-AFD0-705A1364D2E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{180CE58C-7792-4CDE-8366-FAEAB1E7CEE5} = {180CE58C-7792-4CDE-8366-FAEAB1E7CEE5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop", "WarframeWorldStateDesktop\Desktop.csproj", "{EE8FC128-7853-4C16-8E74-ACAECF9BE913}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{180CE58C-7792-4CDE-8366-FAEAB1E7CEE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180CE58C-7792-4CDE-8366-FAEAB1E7CEE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180CE58C-7792-4CDE-8366-FAEAB1E7CEE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180CE58C-7792-4CDE-8366-FAEAB1E7CEE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD02192-A792-4D91-AFD0-705A1364D2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD02192-A792-4D91-AFD0-705A1364D2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD02192-A792-4D91-AFD0-705A1364D2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD02192-A792-4D91-AFD0-705A1364D2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8FC128-7853-4C16-8E74-ACAECF9BE913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8FC128-7853-4C16-8E74-ACAECF9BE913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8FC128-7853-4C16-8E74-ACAECF9BE913}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EE8FC128-7853-4C16-8E74-ACAECF9BE913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8FC128-7853-4C16-8E74-ACAECF9BE913}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
