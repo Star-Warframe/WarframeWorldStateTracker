@@ -12,15 +12,22 @@ namespace WarframeWorldStateTest
     {
         # region variables
         private string m_node = "";
-        string node
+        public string r_node
         {
             get
             {
                 return m_node;
             }
         }
+        public string node
+        {
+            get
+            {
+                return MapSolNode.getNodeName(m_node);
+            }
+        }
         private bool m_hide = false;
-        bool hide
+        public bool hide
         {
             get
             {
@@ -28,15 +35,22 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_faction = "";
-        string faction
+        public string r_faction
         {
             get
             {
                 return m_faction;
             }
         }
+        public string faction
+        {
+            get
+            {
+                return MapFaction.getFaction(m_faction);
+            }
+        }
         private string m_enemySpec = "";
-        string enemySpec
+        public string enemySpec
         {
             get
             {
@@ -44,7 +58,7 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_extraEnemySpec = "";
-        string extraEnemySpec
+        public string extraEnemySpec
         {
             get
             {
@@ -52,7 +66,7 @@ namespace WarframeWorldStateTest
             }
         }
         private DateTime m_expiry = new DateTime();
-        DateTime expiry
+        public DateTime expiry
         {
             get
             {
@@ -93,8 +107,8 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.AppendLine(MapSolNode.getNodeName(m_node));
-            if (m_faction != "") { str.AppendLine(MapFaction.getFaction(m_faction)); }
+            str.AppendLine(node);
+            if (m_faction != "") { str.AppendLine(faction); }
             if (m_enemySpec != "") { str.AppendLine("Enemy Spec: " + m_enemySpec); }
             if (m_extraEnemySpec != "") { str.AppendLine("Extra Enemy Spec: " + m_extraEnemySpec); }
             if (m_expiry.CompareTo(new DateTime()) != 0) { str.AppendLine("Expires: " + m_expiry); }

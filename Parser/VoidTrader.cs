@@ -39,19 +39,36 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_node = "";
-        public string node
+        public string r_node
         {
             get
             {
                 return m_node;
             }
         }
+        public string node
+        {
+            get
+            {
+                return MapSolNode.getNodeName(m_node);
+            }
+        }
         private List<Tuple<string, int, int>> m_manifest = new List<Tuple<string, int, int>>();
-        public List<Tuple<string, int, int>> manifest
+        public List<Tuple<string, int, int>> r_manifest
         {
             get
             {
                 return m_manifest;
+            }
+        }
+        public List<Tuple<string, int, int>> manifest
+        {
+            get
+            {
+                List<Tuple<string, int, int>> returnMe = new List<Tuple<string, int, int>>();
+                foreach (Tuple<string, int, int> t in m_manifest)
+                    returnMe.Add(new Tuple<string, int, int>(MapResource.getResource(t.Item1), t.Item2, t.Item3));
+                return returnMe;
             }
         }
         # endregion
@@ -92,15 +109,15 @@ namespace WarframeWorldStateTest
             {
                 str.AppendLine("Not active");
             }
-            str.AppendLine(MapSolNode.getNodeName(m_node));
+            str.AppendLine(node);
             str.AppendLine("Starts: " + m_activation.ToLocalTime());
             str.AppendLine("Expires: " + m_expiry.ToLocalTime());
             if (m_manifest.Count > 0)
             {
                 str.AppendLine("Items:");
-                foreach (Tuple<string, int, int> t in m_manifest)
+                foreach (Tuple<string, int, int> t in manifest)
                 {
-                    str.AppendLine(MapResource.getResource(t.Item1));
+                    str.AppendLine(t.Item1);
                     str.AppendLine("Ducats: " + t.Item2);
                     str.AppendLine("Credits: " + t.Item3);
                     str.AppendLine();

@@ -53,25 +53,23 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.AppendLine(MapSolNode.getNodeName(missionInfo.location));
+            str.AppendLine(missionInfo.location);
             str.AppendLine("Starts: " + m_activationDate.ToLocalTime().ToString("hh:mm tt"));
             TimeSpan tte = m_expiryDate - DateTime.UtcNow;
             str.AppendLine("Expires: " + m_expiryDate.ToLocalTime().ToString("hh:mm tt") + " (" + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left)" : " minute left)"));   // I bet I'm gonna need to debug this (YUP)
             //Console.WriteLine("Current time: " + DateTime.Now);
-            str.AppendLine("Mission type: " + MapMissionType.getMissionType(m_missionInfo.missionType));
-            str.AppendLine("Faction: " + MapFaction.getFaction(m_missionInfo.faction));
+            str.AppendLine("Mission type: " + m_missionInfo.missionType);
+            str.AppendLine("Faction: " + m_missionInfo.faction);
             str.AppendLine("Level: " + m_missionInfo.minEnemyLevel + "-" + m_missionInfo.maxEnemyLevel);
             str.AppendLine("Rewards: ");
             str.AppendLine("  " + m_missionInfo.missionReward.credits + " credits");
             foreach (string s in m_missionInfo.missionReward.items)
             {
-                string rName = MapResource.getResource(s);
-                str.AppendLine("  " + (rName != "" ? rName : s));
+                str.AppendLine("  " + s);
             }
             foreach (Tuple<string, int> t in m_missionInfo.missionReward.countedItems)
             {
-                string rName = MapResource.getResource(t.Item1);
-                str.AppendLine("  " + t.Item2 + " " + (rName != "" ? rName : t.Item1));
+                str.AppendLine("  " + t.Item2 + " " +  t.Item1);
             }
 
             return str.ToString();

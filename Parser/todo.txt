@@ -2,10 +2,6 @@
 -- Look up ASP.NET to maybe turn this into a web app
   -- Kinda sorta in-progress
 
--- Modify getters for Alert/Invasion/etc. properties to map things such as SolNodes/missionTypes/etc. where applicable
-  -- maybe for things I map have r_<var> for the raw data and <var> for prettified data?
-  -- for Invasion Tuples, maybe make a new Tuple<string, int> with the mapped name as the string component?
-
 -- Might as well make a mapper for all the .json things in data folder
 
 -- https://msdn.microsoft.com/en-us/library/system.io.filesystemwatcher.aspx for updating mappers when a JSON file gets changed?
@@ -41,6 +37,9 @@ xx Figure out how to resolve the issue of the JSON files not being brought along
   xx Done, fix is at the very bottom of WarframeWorldStateWeb.csproj
   xx Works on a local level at least
 xx convert m_messages in Event.cs to a Dictionary maybe
+xx Modify getters for Alert/Invasion/etc. properties to map things such as SolNodes/missionTypes/etc. where applicable
+  xx maybe for things I map have r_<var> for the raw data and <var> for prettified data?
+  xx for Invasion Tuples, maybe make a new Tuple<string, int> with the mapped name as the string component?
 
 In limbo:
 ?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround

@@ -12,11 +12,18 @@ namespace WarframeWorldStateTest
     {
         # region variables
         private string m_challengeTypeRefId = "";
-        public string challengeTypeRefId
+        public string r_challengeTypeRefId
         {
             get
             {
                 return m_challengeTypeRefId;
+            }
+        }
+        public string challengeTypeRefId
+        {
+            get
+            {
+                return MapConclave.getChallenge(m_challengeTypeRefId);
             }
         }
         private DateTime m_startDate = new DateTime();
@@ -52,11 +59,18 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_pvpMode = "";
-        public string pvpMode
+        public string r_pvpMode
         {
             get
             {
                 return m_pvpMode;
+            }
+        }
+        public string pvpMode
+        {
+            get
+            {
+                return MapConclave.getMode(m_pvpMode);
             }
         }
         private List<string> m_subChallenges = new List<string>();
@@ -68,11 +82,18 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_category = "";
-        public string category
+        public string r_category
         {
             get
             {
                 return m_category;
+            }
+        }
+        public string category
+        {
+            get
+            {
+                return MapConclave.getCategory(m_category);
             }
         }
         # endregion
@@ -111,9 +132,9 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.AppendLine(MapConclave.getCategory(m_category) + ":");
-            str.AppendLine(MapConclave.getMode(m_pvpMode));
-            str.AppendLine(MapConclave.getChallenge(m_challengeTypeRefId));
+            str.AppendLine(category + ":");
+            str.AppendLine(pvpMode);
+            str.AppendLine(challengeTypeRefId);
             str.AppendLine("Starts: " + m_startDate.ToLocalTime());
             TimeSpan tte = m_endDate - DateTime.UtcNow;
             str.AppendLine("Expires: " + m_endDate.ToLocalTime() + " (" + tte.Days + (tte.Days != 1 ? " days, " : " day, ") + tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") + tte.Minutes + (tte.Minutes != 1 ? " minutes left)" : " minute left)"));

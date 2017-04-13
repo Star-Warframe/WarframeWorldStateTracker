@@ -12,15 +12,22 @@ namespace WarframeWorldStateTest
     {
         # region variables
         private string m_agentType = "";
-        string agentType
+        public string r_agentType
         {
             get
             {
                 return m_agentType;
             }
         }
+        public string agentType
+        {
+            get
+            {
+                return MapResource.getResource(m_agentType);
+            }
+        }
         private string m_locTag = "";
-        string locTag
+        public string locTag
         {
             get
             {
@@ -28,7 +35,7 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_icon = "";
-        string icon
+        public string icon
         {
             get
             {
@@ -36,7 +43,7 @@ namespace WarframeWorldStateTest
             }
         }
         private int m_rank = 0;
-        int rank
+        public int rank
         {
             get
             {
@@ -44,7 +51,7 @@ namespace WarframeWorldStateTest
             }
         }
         private double m_healthPercent = 0.0;
-        double healthPercent
+        public double healthPercent
         {
             get
             {
@@ -52,7 +59,7 @@ namespace WarframeWorldStateTest
             }
         }
         private int m_fleeDamage = 0;
-        int fleeDamage
+        public int fleeDamage
         {
             get
             {
@@ -60,7 +67,7 @@ namespace WarframeWorldStateTest
             }
         }
         private int m_region = 0;
-        int region
+        public int region
         {
             get
             {
@@ -68,15 +75,22 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_lastDiscoveredLocation = "";
-        string lastDiscoveredLocation
+        public string r_lastDiscoveredLocation
         {
             get
             {
                 return m_lastDiscoveredLocation;
             }
         }
+        public string lastDiscoveredLocation
+        {
+            get
+            {
+                return MapSolNode.getNodeName(m_lastDiscoveredLocation);
+            }
+        }
         private DateTime m_lastDiscoveredTime = new DateTime();
-        DateTime lastDiscoveredTime
+        public DateTime lastDiscoveredTime
         {
             get
             {
@@ -84,7 +98,7 @@ namespace WarframeWorldStateTest
             }
         }
         private bool m_discovered = false;
-        bool discovered
+        public bool discovered
         {
             get
             {
@@ -92,7 +106,7 @@ namespace WarframeWorldStateTest
             }
         }
         private bool m_useTicketing = false;
-        bool useTicketing
+        public bool useTicketing
         {
             get
             {
@@ -127,7 +141,19 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.Append("todo");
+            // Not tested for now since no Stalkerlytes on any platform
+            str.AppendLine(agentType + (m_discovered ? " (Active)" : " (Hidden)"));
+            if (m_discovered)
+            {
+                str.AppendLine(lastDiscoveredLocation);
+            }
+            else
+            {
+                str.AppendLine("Last seen at " + lastDiscoveredLocation + " at " + m_lastDiscoveredTime.ToString("hh:mm tt"));
+            }
+            str.AppendLine("Rank: " + m_rank);
+            str.AppendLine("Health remaining: " + Math.Floor(Math.Abs(m_healthPercent * 100.0)) + "%");
+            // maybe some other stuff
 
             return str.ToString();
         }

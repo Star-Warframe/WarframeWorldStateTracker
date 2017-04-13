@@ -102,11 +102,23 @@ namespace WarframeWorldStateTest
             }
         }
         private List<Tuple<string, int>> m_defenderReward = new List<Tuple<string, int>>();
-        public List<Tuple<string, int>> defenderReward
+        public List<Tuple<string, int>> r_defenderReward
         {
             get
             {
                 return m_defenderReward;
+            }
+        }
+        public List<Tuple<string, int>> defenderReward
+        {
+            get
+            {
+                List<Tuple<string, int>> returnMe = new List<Tuple<string, int>>();
+                foreach(Tuple<string, int> t in m_defenderReward)
+                {
+                    returnMe.Add(new Tuple<string, int>(MapResource.getResource(t.Item1), t.Item2));
+                }
+                return returnMe;
             }
         }
         private Tuple<int, string> m_defenderMissionInfo = new Tuple<int, string>(0, "");

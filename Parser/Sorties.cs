@@ -29,11 +29,18 @@ namespace WarframeWorldStateTest
         }
 
         private string m_boss;
-        public string boss
+        public string r_boss
         {
             get
             {
                 return m_boss;
+            }
+        }
+        public string boss
+        {
+            get
+            {
+                return MapSortie.getBoss(m_boss);
             }
         }
 
@@ -101,17 +108,17 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.AppendLine(MapSortie.getBoss(m_boss));
+            str.AppendLine(boss);
             str.AppendLine("Starts: " + m_activation.ToLocalTime());
             str.AppendLine("Expires: " + m_expiry.ToLocalTime());
             str.AppendLine("Missions:");
             for (int i = 0; i < m_variants.Count; i++)
             {
                 str.AppendLine("  " + (i+1) + ":");
-                str.AppendLine("    " + MapSolNode.getNodeName(m_variants[i].node));
-                str.AppendLine("    Tileset: " + MapTileset.getTileset(m_variants[i].tileset));
-                str.AppendLine("    Mission: " + MapMissionType.getMissionType(variants[i].missionType));
-                str.AppendLine("    Modifier: " + MapSortie.getModifier(variants[i].modifierType));
+                str.AppendLine("    " + m_variants[i].node);
+                str.AppendLine("    Tileset: " + m_variants[i].tileset);
+                str.AppendLine("    Mission: " + variants[i].missionType);
+                str.AppendLine("    Modifier: " + variants[i].modifierType);
             }
 
             return str.ToString();

@@ -28,11 +28,18 @@ namespace WarframeWorldStateTest
             }
         }
         private string m_tag = "";
-        public string tag
+        public string r_tag
         {
             get
             {
                 return m_tag;
+            }
+        }
+        public string tag
+        {
+            get
+            {
+                return MapSyndicate.getSyndicate(m_tag);
             }
         }
         private int m_seed = 0;
@@ -44,11 +51,21 @@ namespace WarframeWorldStateTest
             }
         }
         private List<string> m_nodes = new List<string>();
-        public List<string> nodes
+        public List<string> r_nodes
         {
             get
             {
                 return m_nodes;
+            }
+        }
+        public List<string> nodes
+        {
+            get
+            {
+                List<string> returnMe = new List<string>();
+                foreach (string s in m_nodes)
+                    returnMe.Add(MapSolNode.getNodeName(s));
+                return returnMe;
             }
         }
         # endregion
@@ -73,7 +90,7 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.AppendLine(MapSyndicate.getSyndicate(m_tag) + ":");
+            str.AppendLine(tag + ":");
             str.AppendLine("Starts: " + m_activation.ToLocalTime());
             str.AppendLine("Expires: " + m_expiry.ToLocalTime());
             str.AppendLine("Missions: ");

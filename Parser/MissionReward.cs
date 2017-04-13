@@ -20,19 +20,39 @@ namespace WarframeWorldStateTest
             }
         }
         private List<string> m_items = new List<string>();
-        public List<string> items
+        public List<string> r_items
         {
             get
             {
                 return m_items;
             }
         }
+        public List<string> items
+        {
+            get
+            {
+                List<string> returnMe = new List<string>();
+                foreach (string s in m_items)
+                    returnMe.Add(MapResource.getResource(s));
+                return returnMe;
+            }
+        }
         private List<Tuple<string, int>> m_countedItems = new List<Tuple<string, int>>();
-        public List<Tuple<string, int>> countedItems
+        public List<Tuple<string, int>> r_countedItems
         {
             get
             {
                 return m_countedItems;
+            }
+        }
+        public List<Tuple<string, int>> countedItems
+        {
+            get
+            {
+                List<Tuple<string, int>> returnMe = new List<Tuple<string, int>>();
+                foreach(Tuple<string, int> t in m_countedItems)
+                    returnMe.Add(new Tuple<string, int>(MapResource.getResource(t.Item1), t.Item2));
+                return returnMe;
             }
         }
         // probably some other stuff

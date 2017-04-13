@@ -47,6 +47,7 @@
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsStreakStopped_MEDIUM": "Kill 3 enemies on a kill streak",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsTargetInAirEASY": "Kill 1 airborne enemy",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsTargetInAirHARD": "Kill 3 airborne enemies in a match",
+	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsWhileInAirEASY": "Kill 1 enemy while airborne",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsWhileInAirMEDIUM": "Kill 4 enemies while airborne",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsWhileInAirHARD": "Kill 3 enemies while airborne in a match",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsWhileSlidingEASY": "Kill 1 enemy while sliding",

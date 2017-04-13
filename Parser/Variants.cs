@@ -12,35 +12,63 @@ namespace WarframeWorldStateTest
     {
         # region variables
         private string m_missionType = "";
-        public string missionType
+        public string r_missionType
         {
             get
             {
                 return m_missionType;
             }
         }
+        public string missionType
+        {
+            get
+            {
+                return MapMissionType.getMissionType(m_missionType);
+            }
+        }
         private string m_modifierType = "";
-        public string modifierType
+        public string r_modifierType
         {
             get
             {
                 return m_modifierType;
             }
         }
+        public string modifierType
+        {
+            get
+            {
+                return MapSortie.getModifier(m_modifierType);
+            }
+        }
         private string m_node = ""; // SolNode###
-        public string node
+        public string r_node
         {
             get
             {
                 return m_node;
             }
         }
+        public string node
+        {
+            get
+            {
+                return MapSolNode.getNodeName(m_node);
+            }
+        }
         private string m_tileset = "";
-        public string tileset
+        public string r_tileset
         {
             get
             {
                 return m_tileset;
+            }
+        }
+        public string tileset
+        {
+            get
+            {
+                return MapTileset.getTileset(m_tileset);
             }
         }
         # endregion

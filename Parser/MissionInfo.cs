@@ -12,27 +12,48 @@ namespace WarframeWorldStateTest
     {
         # region variables
         private string m_missionType = "";
-        public string missionType
+        public string r_missionType
         {
             get
             {
                 return m_missionType;
             }
         }
+        public string missionType
+        {
+            get
+            {
+                return MapMissionType.getMissionType(m_missionType);
+            }
+        }
         private string m_faction = "";
-        public string faction
+        public string r_faction
         {
             get
             {
                 return m_faction;
             }
         }
+        public string faction
+        {
+            get
+            {
+                return MapFaction.getFaction(m_faction);
+            }
+        }
         private string m_location = "";
-        public string location
+        public string r_location
         {
             get
             {
                 return m_location;
+            }
+        }
+        public string location
+        {
+            get
+            {
+                return MapSolNode.getNodeName(m_location);
             }
         }
         private string m_levelOverride = "";
