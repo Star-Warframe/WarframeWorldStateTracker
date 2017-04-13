@@ -22,8 +22,6 @@ Low priority:
 
 -- Refactor mappers to be a single class, maybe
 
--- convert m_messages in Event.cs to a Dictionary maybe
-
 Done:
 xx Add Stalkerlyte data structure
 xx Figure out how to populate the form on comboBox1 changes (to actually get data into a visible state)
@@ -42,6 +40,7 @@ xx Split up Parser and UI into different projects
 xx Figure out how to resolve the issue of the JSON files not being brought along with code
   xx Done, fix is at the very bottom of WarframeWorldStateWeb.csproj
   xx Works on a local level at least
+xx convert m_messages in Event.cs to a Dictionary maybe
 
 In limbo:
 ?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround

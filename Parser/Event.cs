@@ -53,7 +53,7 @@ namespace WarframeWorldStateTest
                 return m_date;
             }
         }
-        private DateTime m_eventStartDate = new DateTime();    // optional
+        private DateTime m_eventStartDate = new DateTime();
         public DateTime eventStartDate
         {
             get
@@ -62,8 +62,8 @@ namespace WarframeWorldStateTest
             }
         }
         
-        private List<Tuple<string, string>> m_messages = new List<Tuple<string, string>>();
-        public List<Tuple<string, string>> messages
+        private Dictionary<string, string> m_messages = new Dictionary<string, string>();
+        public Dictionary<string, string> messages
         {
             get
             {
@@ -78,7 +78,8 @@ namespace WarframeWorldStateTest
             m_id = ev["_id"]["$oid"].ToString();
             foreach (var jobj in ev["Messages"])
             {
-                m_messages.Add(new Tuple<string, string>(jobj["LanguageCode"].ToString(), jobj["Message"].ToString()));
+                if (!m_messages.ContainsKey(jobj["LanguageCode"].ToString()))
+                    m_messages.Add(jobj["LanguageCode"].ToString(), jobj["Message"].ToString());
             }
             m_prop = ev["Prop"].ToString();
             m_date = WorldStateHelper.unixTimeToDateTime(ev["Date"]["$date"]["$numberLong"].ToObject<long>());
@@ -114,15 +115,16 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            foreach (Tuple<string, string> m in m_messages)
+            foreach (var m in m_messages)
             {
-                if (m.Item1 == "en")
+                if (m.Key == "en")
                 {
-                    str.AppendLine(m.Item2);
+                    str.AppendLine(m.Value);
                     break;
                 }
             }
-            str.AppendLine("(" + (DateTime.UtcNow - m_date).Days + " days ago) " + m_date.ToString());
+            TimeSpan timeUp = DateTime.UtcNow - m_date;
+            str.AppendLine("(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + m_date.ToString());
             str.AppendLine(m_prop);
 
             return str.ToString();
