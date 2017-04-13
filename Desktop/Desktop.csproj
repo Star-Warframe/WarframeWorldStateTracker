@@ -121,59 +121,59 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="..\WarframeWorldStateTest\data\conclaveData.json">
+    <Content Include="..\Parser\data\conclaveData.json">
       <Link>data\conclaveData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\eventsData.json">
+    <Content Include="..\Parser\data\eventsData.json">
       <Link>data\eventsData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\factionsData.json">
+    <Content Include="..\Parser\data\factionsData.json">
       <Link>data\factionsData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\fissureModifiers.json">
+    <Content Include="..\Parser\data\fissureModifiers.json">
       <Link>data\fissureModifiers.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\languages.json">
+    <Content Include="..\Parser\data\languages.json">
       <Link>data\languages.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\missionTypes.json">
+    <Content Include="..\Parser\data\missionTypes.json">
       <Link>data\missionTypes.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\operationTypes.json">
+    <Content Include="..\Parser\data\operationTypes.json">
       <Link>data\operationTypes.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\persistentEnemyData.json">
+    <Content Include="..\Parser\data\persistentEnemyData.json">
       <Link>data\persistentEnemyData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\resourcesData.json">
+    <Content Include="..\Parser\data\resourcesData.json">
       <Link>data\resourcesData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\solNodes.json">
+    <Content Include="..\Parser\data\solNodes.json">
       <Link>data\solNodes.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\sortieData.json">
+    <Content Include="..\Parser\data\sortieData.json">
       <Link>data\sortieData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\syndicatesData.json">
+    <Content Include="..\Parser\data\syndicatesData.json">
       <Link>data\syndicatesData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\tilesetData.json">
+    <Content Include="..\Parser\data\tilesetData.json">
       <Link>data\tilesetData.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\WarframeWorldStateTest\data\upgradeTypes.json">
+    <Content Include="..\Parser\data\upgradeTypes.json">
       <Link>data\upgradeTypes.json</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -197,7 +197,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WarframeWorldStateTest\Parser.csproj">
+    <ProjectReference Include="..\Parser\Parser.csproj">
       <Project>{180ce58c-7792-4cde-8366-faeab1e7cee5}</Project>
       <Name>Parser</Name>
     </ProjectReference>
