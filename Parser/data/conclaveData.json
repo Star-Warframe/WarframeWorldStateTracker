@@ -17,6 +17,8 @@
   "challenges": {
     "/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperEnergy": "Increased Energy",
     "/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperMeleeDamage": "Increased melee damage",
+	"/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperPistolDamage": "Increased pistol damage",
+	"/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperPowerDamage": "Increased power damage",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeFlagCaptureMEDIUM": "Capture 4 Cephalons",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeFlagReturnEASY": "Return your team's Cephalon 1 time",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeGameModeComplete": "Complete 20 matches of any game type",
@@ -31,6 +33,7 @@
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPaybackEASY": "Kill 1 enemy that has killed you",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPayback_MEDIUM": "Kill 3 enemies that have killed you",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPowerEASY": "Get 1 Warframe power kill",
+	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPowerMEDIUM": "Get 4 Warframe power kills",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPowerHARD": "Get 3 power kills in a match",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPrimaryEASY": "Kill 1 enemy with your primary weapon",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPrimaryMEDIUM": "Kill 4 enemies with your primary weapon",

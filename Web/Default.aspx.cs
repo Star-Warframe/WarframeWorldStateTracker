@@ -10,15 +10,36 @@ namespace WorldStateWeb
     public partial class _Default : Page
     {
         protected WarframeWorldStateTest.WorldStateData wsdata;
-        protected System.Text.StringBuilder _str = new System.Text.StringBuilder();
+        protected System.Text.StringBuilder alerts = new System.Text.StringBuilder();
+        protected System.Text.StringBuilder sorties = new System.Text.StringBuilder();
+        protected System.Text.StringBuilder invasions = new System.Text.StringBuilder();
+        protected System.Text.StringBuilder fissures = new System.Text.StringBuilder();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             wsdata = new WarframeWorldStateTest.WorldStateData();
             foreach (WarframeWorldStateTest.Alert alert in wsdata.alerts)
             {
-                _str.AppendLine(alert.ToString());
-                _str.AppendLine("</br>");
+                alerts.AppendLine(alert.ToString());
+                alerts.AppendLine("</br>");
+            }
+
+            foreach(WarframeWorldStateTest.Sorties sortie in wsdata.sorties)
+            {
+                sorties.AppendLine(sortie.ToString());
+                sorties.AppendLine("</br>");
+            }
+            
+            foreach(WarframeWorldStateTest.Invasion invasion in wsdata.invasions)
+            {
+                invasions.AppendLine(invasion.ToString());
+                invasions.AppendLine("</br>");
+            }
+
+            foreach(WarframeWorldStateTest.FissureMission fissure in wsdata.fissureMissions)
+            {
+                fissures.AppendLine(fissure.ToString());
+                fissures.AppendLine("</br>");
             }
         }
     }

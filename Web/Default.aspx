@@ -10,9 +10,15 @@
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h3>Alerts: </h3> 
-    <%= _str.ToString() %>
-    <ol class="round">
+    <h3>Alerts:</h3> 
+    <%= alerts.ToString() %>
+    <h3>Sorties:</h3>
+    <%= sorties.ToString() %>
+    <h3>Invasions:</h3>
+    <%= invasions.ToString() %>
+    <h3>Void Fissures:</h3>
+    <%= fissures.ToString() %>
+    <%--<ol class="round">
         <li class="one">
             <h5>Getting Started</h5>
             ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
@@ -29,5 +35,5 @@
             You can easily find a web hosting company that offers the right mix of features and price for your applications.
             <a href="http://go.microsoft.com/fwlink/?LinkId=245143">Learn more…</a>
         </li>
-    </ol>
+    </ol>--%>
 </asp:Content>
