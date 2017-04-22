@@ -67,6 +67,7 @@
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballChecksHARD": "Strike opponents carrying the ball 6 times in a match",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballGoalsEASY": "Score 2 goals",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballGoalsHARD": "Score 4 goals in a match",
+	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballInterceptionsEASY": "Intercept 3 passes from opponents",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballInterceptionsMEDIUM": "Intercept 6 passes from opponents",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballInterceptionsHARD": "Intercept 6 passes from opponents in a match",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeSpeedballPassesEASY": "Complete 3 successful passes to a teammate",
