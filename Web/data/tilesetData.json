@@ -12,5 +12,6 @@
   "GrineerSettlementTileset" : "Grineer Settlement",
   "GrineerShipyardsTileset" : "Grineer Shipyard",
   "InfestedCorpusShipTileset" : "Infested Corpus Ship",
-  "OrokinMoonTilesetCorpus" : "Lua"
+  "OrokinMoonTilesetCorpus" : "Orokin Moon",
+  "OrokinMoonTilesetGrineer" : "Orokin Moon",
 }

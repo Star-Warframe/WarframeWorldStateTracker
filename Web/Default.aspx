@@ -10,14 +10,14 @@
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h3>Alerts:</h3> 
-    <%= alerts.ToString() %>
-    <h3>Sorties:</h3>
-    <%= sorties.ToString() %>
-    <h3>Invasions:</h3>
-    <%= invasions.ToString() %>
-    <h3>Void Fissures:</h3>
-    <%= fissures.ToString() %>
+        <h3>Alerts:</h3> 
+        <%= alerts.ToString() %>
+        <h3>Sorties:</h3>
+        <%= sorties.ToString() %>
+        <h3>Invasions:</h3>
+        <%= invasions.ToString() %>
+        <h3>Void Fissures:</h3>
+        <%= fissures.ToString() %>
     <%--<ol class="round">
         <li class="one">
             <h5>Getting Started</h5>
