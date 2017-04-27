@@ -1,6 +1,11 @@
 ﻿High priority:
--- Look up ASP.NET to maybe turn this into a web app
-  -- Kinda sorta in-progress
+-- ASP.NET Web app:
+  ?? Kinda sorta in-progress
+  -- Read up on AJAX UpdatePanel, Timer, and ScriptManager for dynamically updating stuff (Design view of .aspx -> Toolbox)
+  -- Maybe use MVC instead of just a blank ASP.NET project
+  -- Add lock of some sort to wsdata in Global.asax to make access thread safe
+  -- Move some of the code from Default.aspx.cs to application level
+  -- Get rid of contact page maybe
 
 -- Might as well make a mapper for all the .json things in data folder
 

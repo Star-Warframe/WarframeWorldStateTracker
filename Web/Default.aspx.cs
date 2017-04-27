@@ -9,7 +9,7 @@ namespace WorldStateWeb
 {
     public partial class _Default : Page
     {
-        protected WarframeWorldStateTest.WorldStateData wsdata;
+        //protected WarframeWorldStateTest.WorldStateData wsdata;
         protected System.Text.StringBuilder alerts = new System.Text.StringBuilder();
         protected System.Text.StringBuilder sorties = new System.Text.StringBuilder();
         protected System.Text.StringBuilder invasions = new System.Text.StringBuilder();
@@ -17,10 +17,10 @@ namespace WorldStateWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            wsdata = new WarframeWorldStateTest.WorldStateData();
+            //wsdata = new WarframeWorldStateTest.WorldStateData();
 
             alerts.AppendLine("<ul>");
-            foreach (WarframeWorldStateTest.Alert alert in wsdata.alerts)
+            foreach (WarframeWorldStateTest.Alert alert in Global.wsdata.alerts)
             {
                 alerts.AppendLine("<li>");
                 //alerts.Append(alert.ToString());
@@ -38,21 +38,21 @@ namespace WorldStateWeb
             }
             alerts.AppendLine("</ul>");
 
-            foreach(WarframeWorldStateTest.Sorties sortie in wsdata.sorties)
+            foreach (WarframeWorldStateTest.Sorties sortie in Global.wsdata.sorties)
             {
                 sorties.AppendLine(sortie.ToString());
                 sorties.AppendLine("</br>");
             }
 
             invasions.AppendLine("<ul>");
-            foreach(WarframeWorldStateTest.Invasion invasion in wsdata.invasions)
+            foreach (WarframeWorldStateTest.Invasion invasion in Global.wsdata.invasions)
             {
                 invasions.AppendLine("<li>" + invasion.ToString() + "</li>");
             }
             invasions.AppendLine("</ul>");
 
             fissures.AppendLine("<ul>");
-            foreach(WarframeWorldStateTest.FissureMission fissure in wsdata.fissureMissions)
+            foreach (WarframeWorldStateTest.FissureMission fissure in Global.wsdata.fissureMissions)
             {
                 fissures.AppendLine("<li>");
                 //fissures.Append(fissure.ToString());
