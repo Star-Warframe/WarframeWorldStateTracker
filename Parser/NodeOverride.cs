@@ -108,9 +108,9 @@ namespace WarframeWorldStateTest
             StringBuilder str = new StringBuilder();
 
             str.AppendLine(node);
-            if (m_faction != "") { str.AppendLine(faction); }
-            if (m_enemySpec != "") { str.AppendLine("Enemy Spec: " + m_enemySpec); }
-            if (m_extraEnemySpec != "") { str.AppendLine("Extra Enemy Spec: " + m_extraEnemySpec); }
+            if (m_faction != "") { str.AppendLine(faction + " occupying"); }
+            //if (m_enemySpec != "") { str.AppendLine("Enemy Spec: " + m_enemySpec); }
+            //if (m_extraEnemySpec != "") { str.AppendLine("Extra Enemy Spec: " + m_extraEnemySpec); }
             if (m_expiry.CompareTo(new DateTime()) != 0) { str.AppendLine("Expires: " + m_expiry); }
             if (m_hide) { str.AppendLine("Hidden"); }
 

@@ -1,4 +1,6 @@
 ﻿High priority:
+-- Add tag and description for Gift of the Lotus and Design Council Challenge alerts
+
 -- ASP.NET Web app:
   ?? Kinda sorta in-progress
   -- Read up on AJAX UpdatePanel, Timer, and ScriptManager for dynamically updating stuff (Design view of .aspx -> Toolbox)
@@ -10,6 +12,7 @@
 -- Might as well make a mapper for all the .json things in data folder
 
 -- https://msdn.microsoft.com/en-us/library/system.io.filesystemwatcher.aspx for updating mappers when a JSON file gets changed?
+  -- Need to find a better way to manage the JSON files before trying this
 
 ?? (Ongoing) Check PVP Challenges for consistency of numbers and add new types
 

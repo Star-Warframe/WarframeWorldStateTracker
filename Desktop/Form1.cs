@@ -210,10 +210,16 @@ namespace WarframeWorldStateTest
                 case "projectPct":
                     {
                         StringBuilder str = new StringBuilder();
-                        foreach (double pp in wsdata.projectPct)
+                        // projectPct[0] is Fomorian progress
+                        // projectPct[1] is Razorback Armada progress
+                        // projectPct[2] is ???
+
+                        if (wsdata.projectPct != null)
                         {
-                            str.AppendLine(pp.ToString());
+                            str.AppendLine("Fomorian: " + wsdata.projectPct[0].ToString("N1") + "%");
+                            str.AppendLine("Razorback Armada: " + wsdata.projectPct[1].ToString("N1") + "%");
                         }
+
                         textBox1.Text = str.ToString();
                         break;
                     }

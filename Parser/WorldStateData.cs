@@ -73,7 +73,7 @@ namespace WarframeWorldStateTest
             new KeyValuePair<string, string> ( "pvpChallengeInstances", "PVP Challenges" ),
             new KeyValuePair<string, string> ( "pvpAlternativeModes", "PVP Alternative Modes" ),
             new KeyValuePair<string, string> ( "persistentEnemies", "Persistent Enemies" ),
-            new KeyValuePair<string, string> ( "projectPct", "ProjectPct" ),
+            new KeyValuePair<string, string> ( "projectPct", "Invasion Event Status" ),
         };
         public List<KeyValuePair<string, string>> varList
         {
@@ -226,7 +226,7 @@ namespace WarframeWorldStateTest
             }
         }
         // List of PVPActiveTournaments
-        List<double> m_projectPct = new List<double>();   // ProjectPct (No idea what this is!)
+        List<double> m_projectPct = new List<double>();   // ProjectPct (Invasion construction status [Fomorian, Razorback Armada, ???])
         public List<double> projectPct
         {
             get
@@ -249,11 +249,24 @@ namespace WarframeWorldStateTest
          */
         public WorldStateData()
         {
+#if DEBUG
             Stopwatch st = Stopwatch.StartNew();
+#endif
             getWorldState();
             parseWorldState();
+#if DEBUG
             st.Stop();
             Console.WriteLine("Retrieved and parsed WorldState in " + st.ElapsedMilliseconds + "ms");
+#endif
+        }
+
+        public WorldStateData(string platform)  // todo: maybe add a class to specify platforms by name so something like "new WorldStateData(GamePlatform.XBOX1)" can be done
+        {
+            string p = platform.ToLower();
+            if (worldStateUrls.ContainsKey(p))
+            {
+                wsUrl = worldStateUrls[p];
+            }
         }
 
         /*
@@ -287,12 +300,16 @@ namespace WarframeWorldStateTest
 
         public void refreshWorldState()
         {
+#if DEBUG
             Stopwatch st = Stopwatch.StartNew();
+#endif
             clearAll();
             getWorldState();
             parseWorldState();
+#if DEBUG
             st.Stop();
             Console.WriteLine("Refreshed WorldState in " + st.ElapsedMilliseconds + "ms");
+#endif
         }
 
         private void parseWorldState()
@@ -551,7 +568,7 @@ namespace WarframeWorldStateTest
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error while populating ProjectPct values (still don't know what it's supposed to be)");
+                Console.WriteLine("Error while populating ProjectPct values");
                 Console.WriteLine(e.StackTrace);
             }
 
