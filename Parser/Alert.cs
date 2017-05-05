@@ -56,7 +56,7 @@ namespace WarframeWorldStateTest
             str.AppendLine(missionInfo.location);
             str.AppendLine("Starts: " + m_activationDate.ToLocalTime().ToString("hh:mm tt"));
             TimeSpan tte = m_expiryDate - DateTime.UtcNow;
-            str.AppendLine("Expires: " + m_expiryDate.ToLocalTime().ToString("hh:mm tt") + " (" + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left)" : " minute left)"));   // I bet I'm gonna need to debug this (YUP)
+            str.AppendLine("Expires: " + m_expiryDate.ToLocalTime().ToString("hh:mm tt") + " (" + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left)" : " minute left)"));
             //Console.WriteLine("Current time: " + DateTime.Now);
             str.AppendLine("Mission type: " + m_missionInfo.missionType);
             str.AppendLine("Faction: " + m_missionInfo.faction);

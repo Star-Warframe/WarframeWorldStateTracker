@@ -17,6 +17,11 @@
 ?? (Ongoing) Check PVP Challenges for consistency of numbers and add new types
 
 Low priority:
+-- Maybe for default class constructors, fill the item with default values?
+
+-- Maybe rethink properties and private m_- variables. Could replace them with a { get; private set; } property maybe?
+  -- Might as well keep it consistent for now
+
 -- Re-learn delegates and events and stuff and allow the button press to refresh the worldState in both windows
 
 -- Maybe think about refactoring the object lists to HashMap or something that can both ignore duplicates upon WorldState refresh, add new things when relevant, and remove old/expired things

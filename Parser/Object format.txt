@@ -14,7 +14,42 @@ Event: list of objects
 	Priority: bool
 	MobileOnly: bool
 
-Goal: list (empty for now)
+Goal: list of objects
+	_id: object
+		$oid: string
+	Activation: object
+		$date: object
+			$numberLong: long
+	Expiry: object
+		$date: object
+			$numberLong
+	Tag: string
+	PrereqGoalTags: list (optional)
+		of strings
+	Count: int
+	Goal: int
+	Node: string (solNode) (optional)
+	ClanGoal: list (optional)
+		of ints (No affiliation, Ghost, Shadow, Storm, Mountain, Moon)
+	Success: int
+	Personal: bool
+	RegionIdx: int (optional)
+	Faction: string
+	ItemType: string (path) (optional)
+	ScoreVar: string (optional)
+	ScoreMaxTag: string (optional)
+	ScoreLocTag: string (path) (optional)
+	Desc: string (path)
+	ToolTip: string (path)
+	Icon: string (path)
+	Reward: object (optional)
+		items: list
+			of strings (paths)
+	Roaming: bool (optional)
+	RoamingVIP: string (path) (optional)
+	MissionInfo: object
+		icon: string (path)
+	RewardNode: string (solNode) (optional)
 
 Alert: list of objects
 	_id: object

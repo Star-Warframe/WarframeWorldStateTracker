@@ -60,6 +60,7 @@ namespace WarframeWorldStateTest
         {
             new KeyValuePair<string, string> ( "alerts", "Alerts" ),
             new KeyValuePair<string, string> ( "events", "Events" ),
+            new KeyValuePair<string, string> ( "goals", "Goals" ),
             new KeyValuePair<string, string> ( "sorties", "Sorties" ),
             new KeyValuePair<string, string> ( "syndicateMissions", "Syndicate Missions" ),
             new KeyValuePair<string, string> ( "fissureMissions", "Fissure Missions" ),
@@ -94,8 +95,15 @@ namespace WarframeWorldStateTest
                 return m_events;
             }
         }
-        // List of Goals
-        List<Alert> m_alerts = new List<Alert>(); // ALerts
+        List<Goal> m_goals = new List<Goal>(); // Goals
+        public List<Goal> goals
+        {
+            get
+            {
+                return m_goals;
+            }
+        }
+        List<Alert> m_alerts = new List<Alert>(); // Alerts
         public List<Alert> alerts
         {
             get
@@ -281,6 +289,7 @@ namespace WarframeWorldStateTest
         private void clearAll()
         {
             m_events.Clear();
+            m_goals.Clear();
             m_alerts.Clear();
             m_sorties.Clear();
             m_syndicateMissions.Clear();
@@ -328,6 +337,19 @@ namespace WarframeWorldStateTest
             } catch (Exception e)
             {
                 Console.WriteLine("Error while populating Events");
+                Console.WriteLine(e.StackTrace);
+            }
+
+            // Goals
+            try
+            {
+                foreach (JObject jobj in worldStatePhpJson["Goals"])
+                {
+                    m_goals.Add(new Goal(jobj));
+                }
+            } catch (Exception e)
+            {
+                Console.WriteLine("Error while populating Goals");
                 Console.WriteLine(e.StackTrace);
             }
 

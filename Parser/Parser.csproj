@@ -93,6 +93,7 @@
     <Compile Include="Event.cs" />
     <Compile Include="FissureMission.cs" />
     <Compile Include="FlashSale.cs" />
+    <Compile Include="Goal.cs" />
     <Compile Include="Invasion.cs" />
     <Compile Include="mappers\MapConclave.cs" />
     <Compile Include="mappers\MapFaction.cs" />

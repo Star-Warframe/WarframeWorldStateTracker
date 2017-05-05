@@ -16,6 +16,7 @@
   },
   "challenges": {
     "/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperEnergy": "Increased Energy",
+	"/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperEverything": "Increased everything",
     "/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperMeleeDamage": "Increased melee damage",
 	"/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperPistolDamage": "Increased pistol damage",
 	"/Lotus/PVPChallengeTypes/PVPTimedAffectorSuperPowerDamage": "Increased power damage",
@@ -49,6 +50,7 @@
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsStreakStoppedEASY": "Kill 1 enemy on a kill streak",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsStreakStopped_MEDIUM": "Kill 3 enemies on a kill streak",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsTargetInAirEASY": "Kill 1 airborne enemy",
+	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsTargetInAirMEDIUM": "Kill 4 airborne enemies",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsTargetInAirHARD": "Kill 3 airborne enemies in a match",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsWhileInAirEASY": "Kill 1 enemy while airborne",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsWhileInAirMEDIUM": "Kill 4 enemies while airborne",

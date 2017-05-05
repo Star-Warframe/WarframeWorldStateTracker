@@ -67,6 +67,16 @@ namespace WarframeWorldStateTest
                         textBox1.Text = str.ToString();
                         break;
                     }
+                case "goals":
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach(Goal go in wsdata.goals)
+                        {
+                            str.AppendLine(go.ToString());
+                        }
+                        textBox1.Text = str.ToString();
+                        break;
+                    }
                 case "alerts":
                     {
                         StringBuilder str = new StringBuilder();
