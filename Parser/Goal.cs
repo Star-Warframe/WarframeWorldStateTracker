@@ -11,6 +11,14 @@ namespace WarframeWorldStateTest
     public class Goal : WorldStateObject
     {
         #region variables
+        private bool m_fomorian = false;
+        public bool fomorian
+        {
+            get
+            {
+                return m_fomorian;
+            }
+        }
         private DateTime m_activation = new DateTime();
         public DateTime activation
         {
@@ -59,6 +67,29 @@ namespace WarframeWorldStateTest
                 return m_goal;
             }
         }
+        private double m_healthPct = 0.0;
+        public double healthPct
+        {
+            get
+            {
+                return m_healthPct;
+            }
+        }
+        private string m_victimNode = "";
+        public string r_victimNode
+        {
+            get
+            {
+                return m_victimNode;
+            }
+        }
+        public string victimNode
+        {
+            get
+            {
+                return MapSolNode.getNodeName(m_victimNode);
+            }
+        }
         private string m_node = "";
         public string r_node
         {
@@ -96,6 +127,14 @@ namespace WarframeWorldStateTest
             get
             {
                 return m_personal;
+            }
+        }
+        private bool m_best = false;
+        public bool best
+        {
+            get
+            {
+                return m_best;
             }
         }
         private int m_regionIdx = 0;
@@ -177,6 +216,46 @@ namespace WarframeWorldStateTest
                 return m_icon;
             }
         }
+        private List<string> m_regionDrops = new List<string>();
+        public List<string> r_regionDrops
+        {
+            get
+            {
+                return m_regionDrops;
+            }
+        }
+        public List<string> regionDrops
+        {
+            get
+            {
+                List<string> returnMe = new List<string>();
+                foreach (string s in m_regionDrops)
+                {
+                    returnMe.Add(MapResource.getResource(s));
+                }
+                return returnMe;
+            }
+        }
+        private List<string> m_archwingDrops = new List<string>();
+        public List<string> r_archwingDrops
+        {
+            get
+            {
+                return m_archwingDrops;
+            }
+        }
+        public List<string> archwingDrops
+        {
+            get
+            {
+                List<string> returnMe = new List<string>();
+                foreach (string s in m_archwingDrops)
+                {
+                    returnMe.Add(MapResource.getResource(s));
+                }
+                return returnMe;
+            }
+        }
         private List<string> m_rewardItems = new List<string>();
         public List<string> r_rewardItems
         {
@@ -213,14 +292,6 @@ namespace WarframeWorldStateTest
                 return m_roamingVip;
             }
         }
-        private string m_missionInfoIcon = "";
-        public string missionInfoIcon
-        {
-            get
-            {
-                return m_missionInfoIcon;
-            }
-        }
         private string m_rewardNode = "";
         public string r_rewardNode
         {
@@ -236,6 +307,7 @@ namespace WarframeWorldStateTest
                 return MapSolNode.getNodeName(m_rewardNode);
             }
         }
+        MissionInfo m_missionInfo = new MissionInfo();
         #endregion
 
         public Goal()
@@ -246,6 +318,7 @@ namespace WarframeWorldStateTest
         public Goal(JObject go)
         {
             m_id = go["_id"]["$oid"].ToString();
+            if (go["Fomorian"] != null) { m_fomorian = go["Fomorian"].ToObject<bool>(); }
             m_activation = WorldStateHelper.unixTimeToDateTime(go["Activation"]["$date"]["$numberLong"].ToObject<long>());
             m_expiry = WorldStateHelper.unixTimeToDateTime(go["Expiry"]["$date"]["$numberLong"].ToObject<long>());
             m_tag = go["Tag"].ToString();
@@ -258,8 +331,9 @@ namespace WarframeWorldStateTest
             }
             m_count = go["Count"].ToObject<int>();
             m_goal = go["Goal"].ToObject<int>();
-            if (go["Node"] != null)
-                m_node = go["Node"].ToString();
+            if (go["HealthPct"] != null) { m_healthPct = go["HealthPct"].ToObject<double>(); }
+            if (go["VictimNode"] != null) { m_victimNode = go["VictimNode"].ToString(); }
+            if (go["Node"] != null) { m_node = go["Node"].ToString(); }
             if (go["ClanGoal"] != null)
             {
                 foreach(JValue jval in go["ClanGoal"])
@@ -269,20 +343,30 @@ namespace WarframeWorldStateTest
             }
             m_success = go["Success"].ToObject<int>();
             m_personal = go["Personal"].ToObject<bool>();
-            if (go["RegionIdx"] != null)
-                m_regionIdx = go["RegionIdx"].ToObject<int>();
+            if (go["Best"] != null) { m_best = go["Best"].ToObject<bool>(); }
+            if (go["RegionIdx"] != null) { m_regionIdx = go["RegionIdx"].ToObject<int>(); }
             m_faction = go["Faction"].ToString();
-            if (go["ItemType"] != null)
-                m_itemType = go["ItemType"].ToString();
-            if (go["ScoreVar"] != null)
-                m_scoreVar = go["ScoreVar"].ToString();
-            if (go["ScoreMaxTag"] != null)
-                m_scoreMaxTag = go["ScoreMaxTag"].ToString();
-            if (go["ScoreLocTag"] != null)
-                m_scoreLocTag = go["ScoreLocTag"].ToString();
+            if (go["ItemType"] != null) { m_itemType = go["ItemType"].ToString(); }
+            if (go["ScoreVar"] != null) { m_scoreVar = go["ScoreVar"].ToString(); }
+            if (go["ScoreMaxTag"] != null) { m_scoreMaxTag = go["ScoreMaxTag"].ToString(); }
+            if (go["ScoreLocTag"] != null) { m_scoreLocTag = go["ScoreLocTag"].ToString(); }
             m_desc = go["Desc"].ToString();
             m_toolTip = go["ToolTip"].ToString();
             m_icon = go["Icon"].ToString();
+            if (go["RegionDrops"] != null)
+            {
+                foreach(JValue jval in go["RegionDrops"])
+                {
+                    m_regionDrops.Add(jval.ToString());
+                }
+            }
+            if (go["ArchwingDrops"] != null)
+            {
+                foreach(JValue jval in go["ArchwingDrops"])
+                {
+                    m_archwingDrops.Add(jval.ToString());
+                }
+            }
             if (go["Reward"] != null)
             {
                 foreach (JValue jval in go["Reward"]["items"])
@@ -290,13 +374,10 @@ namespace WarframeWorldStateTest
                     m_rewardItems.Add(jval.ToString());
                 }
             }
-            if (go["Roaming"] != null)
-                m_roaming = go["Roaming"].ToObject<bool>();
-            if (go["RoamingVIP"] != null)
-                m_roamingVip = go["RoamingVIP"].ToString();
-            m_missionInfoIcon = go["MissionInfo"]["icon"].ToString();
-            if (go["RewardNode"] != null)
-                m_rewardNode = go["RewardNode"].ToString();
+            if (go["Roaming"] != null) { m_roaming = go["Roaming"].ToObject<bool>(); }
+            if (go["RoamingVIP"] != null) { m_roamingVip = go["RoamingVIP"].ToString(); }
+            if (go["MissionInfo"] != null) { m_missionInfo = new MissionInfo((JObject)go["MissionInfo"]); }
+            if (go["RewardNode"] != null) { m_rewardNode = go["RewardNode"].ToString(); }
 
         }
 
@@ -329,6 +410,7 @@ This will probably have different stuff in it for different events
 Goal: list of objects
 	_id: object
 		$oid: string
+    Fomorian: bool (optional)
 	Activation: object
 		$date: object
 			$numberLong: long
@@ -340,11 +422,14 @@ Goal: list of objects
 		of strings
 	Count: int
 	Goal: int
+    HealthPct: double/float (optional)
+    VictimNode: string (optional)
 	Node: string (solNode) (optional)
 	ClanGoal: list (optional)
 		of ints (No affiliation, Ghost, Shadow, Storm, Mountain, Moon)
 	Success: int
 	Personal: bool
+    Best: bool
 	RegionIdx: int (optional)
 	Faction: string
 	ItemType: string (path) (optional)
@@ -354,12 +439,15 @@ Goal: list of objects
 	Desc: string (path)
 	ToolTip: string (path)
 	Icon: string (path)
+    RegionDrops: list (optional)
+        of strings
+    ArchwingDrops: list (optional)
+        of strings
 	Reward: object (optional)
 		items: list
 			of strings (paths)
 	Roaming: bool (optional)
 	RoamingVIP: string (path) (optional)
 	MissionInfo: object
-		icon: string (path)
 	RewardNode: string (solNode) (optional)
 */

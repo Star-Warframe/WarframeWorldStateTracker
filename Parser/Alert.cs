@@ -35,6 +35,22 @@ namespace WarframeWorldStateTest
                 return m_missionInfo;
             }
         }
+        private bool m_forceUnlock = false;
+        public bool forceUnlock
+        {
+            get
+            {
+                return m_forceUnlock;
+            }
+        }
+        private string m_tag = "";
+        public string tag
+        {
+            get
+            {
+                return m_tag;
+            }
+        }
         # endregion
 
         public Alert()
@@ -47,6 +63,8 @@ namespace WarframeWorldStateTest
             m_activationDate = WorldStateHelper.unixTimeToDateTime(al["Activation"]["$date"]["$numberLong"].ToObject<long>());
             m_expiryDate = WorldStateHelper.unixTimeToDateTime(al["Expiry"]["$date"]["$numberLong"].ToObject<long>());
             m_missionInfo = new MissionInfo((JObject)al["MissionInfo"]);
+            if (al["ForceUnlock"] != null) { m_forceUnlock = al["ForceUnlock"].ToObject<bool>(); }
+            if (al["Tag"] != null) { m_tag = al["Tag"].ToString(); }
         }
 
         public override string ToString()
@@ -54,6 +72,7 @@ namespace WarframeWorldStateTest
             StringBuilder str = new StringBuilder();
 
             str.AppendLine(missionInfo.location);
+            if (m_tag != "") { str.AppendLine("Tag: " + m_tag); }
             str.AppendLine("Starts: " + m_activationDate.ToLocalTime().ToString("hh:mm tt"));
             TimeSpan tte = m_expiryDate - DateTime.UtcNow;
             str.AppendLine("Expires: " + m_expiryDate.ToLocalTime().ToString("hh:mm tt") + " (" + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left)" : " minute left)"));
@@ -88,17 +107,30 @@ Alert: list of objects
         $date: object
             $numberLong: long
 	MissionInfo: object
+        descText: string (optional)
 		missionType: string
 		faction: string
 		location: string (SolNode###)
 		levelOverride: string (path)
 		enemySpec: string (path)
-		extraEnemySpec: string (path)
+		extraEnemySpec: string (path) (optional)
+        customAdvancedSpawners: list
+            of strings
 		minEnemyLevel: int
 		maxEnemyLevel: int
 		difficulty: double (or float, idk)
-		seed: int
-		maxWaveNum: int
+        archwingRequired: bool (optional)
+        requiredItems: list (optional)
+            of strings
+        vipAgent: string (optional)
+        leadersAlwaysAllowed: bool (optional)
+        goalTag: string (optional)
+        icon: string (optional)
+		seed: int (optional)
+		maxWaveNum: int (optional)
+        fxLayer: string (optional)
+        eomBoss: string (optional)
+        exclusiveWeapon: string (optional)
 		missionReward: object
 			credits: int
 			items: list 
@@ -106,5 +138,8 @@ Alert: list of objects
 			countedItems: list of objects
 				ItemType: string (path)
 				ItemCount: int
+            randomizedItems: string (optional)
 			probablysomemorestuff: other
+    ForceUnlock: bool (optional)
+    Tag: string (optional)
 */

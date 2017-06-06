@@ -17,6 +17,7 @@ Event: list of objects
 Goal: list of objects
 	_id: object
 		$oid: string
+    Fomorian: bool (optional)
 	Activation: object
 		$date: object
 			$numberLong: long
@@ -28,11 +29,14 @@ Goal: list of objects
 		of strings
 	Count: int
 	Goal: int
+    HealthPct: double/float (optional)
+    VictimNode: string (optional)
 	Node: string (solNode) (optional)
 	ClanGoal: list (optional)
 		of ints (No affiliation, Ghost, Shadow, Storm, Mountain, Moon)
 	Success: int
 	Personal: bool
+    Best: bool
 	RegionIdx: int (optional)
 	Faction: string
 	ItemType: string (path) (optional)
@@ -42,36 +46,52 @@ Goal: list of objects
 	Desc: string (path)
 	ToolTip: string (path)
 	Icon: string (path)
+    RegionDrops: list (optional)
+        of strings
+    ArchwingDrops: list (optional)
+        of strings
 	Reward: object (optional)
 		items: list
 			of strings (paths)
 	Roaming: bool (optional)
 	RoamingVIP: string (path) (optional)
 	MissionInfo: object
-		icon: string (path)
 	RewardNode: string (solNode) (optional)
 
 Alert: list of objects
 	_id: object
 		$oid: string
 	Activation: object
-		$date: object
-			$numberLong: long
+        $date: object
+            $numberLong: long
 	Expiry: object
-		$date: object
-			$numberLong: long
+        $date: object
+            $numberLong: long
 	MissionInfo: object
+        descText: string (optional)
 		missionType: string
 		faction: string
 		location: string (SolNode###)
 		levelOverride: string (path)
 		enemySpec: string (path)
-		extraEnemySpec: string (path)
+		extraEnemySpec: string (path) (optional)
+        customAdvancedSpawners: list
+            of strings
 		minEnemyLevel: int
 		maxEnemyLevel: int
 		difficulty: double (or float, idk)
-		seed: int
-		maxWaveNum: int
+        archwingRequired: bool (optional)
+        requiredItems: list (optional)
+            of strings
+        vipAgent: string (optional)
+        leadersAlwaysAllowed: bool (optional)
+        goalTag: string (optional)
+        icon: string (optional)
+		seed: int (optional)
+		maxWaveNum: int (optional)
+        fxLayer: string (optional)
+        eomBoss: string (optional)
+        exclusiveWeapon: string (optional)
 		missionReward: object
 			credits: int
 			items: list 
@@ -79,7 +99,10 @@ Alert: list of objects
 			countedItems: list of objects
 				ItemType: string (path)
 				ItemCount: int
+            randomizedItems: string (optional)
 			probablysomemorestuff: other
+    ForceUnlock: bool (optional)
+    Tag: string (optional)
 
 Sorties: list of objects
 	_id: object

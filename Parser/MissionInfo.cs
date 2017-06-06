@@ -11,6 +11,21 @@ namespace WarframeWorldStateTest
 	public class MissionInfo
 	{
 		# region variables
+        private string m_descText = "";
+        public string r_descText
+        {
+            get
+            {
+                return m_descText;
+            }
+        }
+        public string descText
+        {
+            get
+            {
+                return m_descText;  // no Languages mapper so placeholder
+            }
+        }
 		private string m_missionType = "";
 		public string r_missionType
 		{
@@ -80,6 +95,21 @@ namespace WarframeWorldStateTest
 				return m_extraEnemySpec;
 			}
 		}
+        private List<string> m_customAdvancedSpawners = new List<string>();
+        public List<string> r_customAdvancedSpawners
+        {
+            get
+            {
+                return m_customAdvancedSpawners;
+            }
+        }
+        public List<string> customAdvancedSpawners
+        {
+            get
+            {
+                return m_customAdvancedSpawners;    // placeholder
+            }
+        }
 		private int m_minEnemyLevel = 0;
 		public int minEnemyLevel
 		{
@@ -104,6 +134,65 @@ namespace WarframeWorldStateTest
 				return m_difficulty;
 			}
 		}
+        private bool m_archwingRequired = false;
+        public bool archwingRequired
+        {
+            get
+            {
+                return m_archwingRequired;
+            }
+        }
+        private List<string> m_requiredItems = new List<string>();
+        public List<string> r_requiredItems
+        {
+            get
+            {
+                return m_requiredItems;
+            }
+        }
+        public List<string> requiredItems
+        {
+            get
+            {
+                List<string> returnMe = new List<string>();
+                foreach(string s in m_requiredItems)
+                {
+                    returnMe.Add(MapResource.getResource(s));
+                }
+                return returnMe;
+            }
+        }
+        private string m_vipAgent = "";
+        public string r_vipAgent
+        {
+            get
+            {
+                return m_vipAgent;
+            }
+        }
+        public string vipAgent
+        {
+            get
+            {
+                return MapResource.getResource(m_vipAgent);
+            }
+        }
+        private bool m_leadersAlwaysAllowed = false;
+        public bool leadersAlwaysAllowed
+        {
+            get
+            {
+                return m_leadersAlwaysAllowed;
+            }
+        }
+        private string m_goalTag = "";
+        public string goalTag
+        {
+            get
+            {
+                return m_goalTag;
+            }
+        }
 		private int m_seed = 0;
 		public int seed
 		{
@@ -120,6 +209,44 @@ namespace WarframeWorldStateTest
 				return m_maxWaveNum;
 			}
 		}
+        private string m_fxLayer = "";
+        public string fxLayer
+        {
+            get
+            {
+                return m_fxLayer;
+            }
+        }
+        private string m_eomBoss = "";
+        public string r_eomBoss
+        {
+            get
+            {
+                return m_eomBoss;
+            }
+        }
+        public string eomBoss
+        {
+            get
+            {
+                return m_eomBoss; //placeholder
+            }
+        }
+        private string m_exclusiveWeapon = "";
+        public string r_exclusiveWeapon
+        {
+            get
+            {
+                return m_exclusiveWeapon;
+            }
+        }
+        public string exclusiveWeapon
+        {
+            get
+            {
+                return MapResource.getResource(m_exclusiveWeapon);
+            }
+        }
 		private MissionReward m_missionReward = new MissionReward();
 		public MissionReward missionReward
 		{
@@ -143,15 +270,31 @@ namespace WarframeWorldStateTest
 			m_location = mi["location"].ToString();
 			m_levelOverride = mi["levelOverride"].ToString();
 			m_enemySpec = mi["enemySpec"].ToString();
-			if (mi["extraEnemySpec"] != null)
-				m_extraEnemySpec = mi["extraEnemySpec"].ToString();
+            if (mi["extraEnemySpec"] != null) { m_extraEnemySpec = mi["extraEnemySpec"].ToString(); }
+            if (mi["customAdvancedSpawners"] != null)
+            {
+                foreach (JValue jval in mi["customAdvancedSpawners"])
+                    m_customAdvancedSpawners.Add(jval.ToString());
+            }
 			m_minEnemyLevel = mi["minEnemyLevel"].ToObject<int>();
 			m_maxEnemyLevel = mi["maxEnemyLevel"].ToObject<int>();
 			m_difficulty = mi["difficulty"].ToObject<double>();
-			if (mi["seed"] != null)
-				m_seed = mi["seed"].ToObject<int>();
-			if (mi["maxWaveNum"] != null)
-				m_maxWaveNum = mi["maxWaveNum"].ToObject<int>();
+            if (mi["archwingRequired"] != null) { m_archwingRequired = mi["archwingRequired"].ToObject<bool>(); }
+            if (mi["requiredItems"] != null)
+            {
+                foreach(JValue jval in mi["requiredItems"])
+                {
+                    m_requiredItems.Add(jval.ToString());
+                }
+            }
+            if (mi["vipAgent"] != null) { m_vipAgent = mi["vipAgent"].ToString(); }
+            if (mi["leadersAlwaysAllowed"] != null) { m_leadersAlwaysAllowed = mi["leadersAlwaysAllowed"].ToObject<bool>(); }
+            if (mi["goalTag"] != null) { m_goalTag = mi["goalTag"].ToString(); }
+            if (mi["seed"] != null) { m_seed = mi["seed"].ToObject<int>(); }
+            if (mi["maxWaveNum"] != null) { m_maxWaveNum = mi["maxWaveNum"].ToObject<int>(); }
+            if (mi["fxLayer"] != null) { m_fxLayer = mi["fxLayer"].ToString(); }
+            if (mi["eomBoss"] != null) { m_eomBoss = mi["eomBoss"].ToString(); }
+            if (mi["exclusiveWeapon"] != null) { m_exclusiveWeapon = mi["exclusiveWeapon"].ToString(); }
 			m_missionReward = new MissionReward((JObject)mi["missionReward"]);
 		}
 	}
@@ -162,23 +305,36 @@ Alert: list of objects
 	_id: object
 		$oid: string
 	Activation: object
-		sec: long
-		usec: long
+        $date: object
+            $numberLong: long
 	Expiry: object
-		sec: long
-		usec: long
+        $date: object
+            $numberLong: long
 	MissionInfo: object
+        descText: string (optional)
 		missionType: string
 		faction: string
 		location: string (SolNode###)
 		levelOverride: string (path)
 		enemySpec: string (path)
-		extraEnemySpec: string (path)
+		extraEnemySpec: string (path) (optional)
+        customAdvancedSpawners: list
+            of strings
 		minEnemyLevel: int
 		maxEnemyLevel: int
 		difficulty: double (or float, idk)
-		seed: int
-		maxWaveNum: int
+        archwingRequired: bool (optional)
+        requiredItems: list (optional)
+            of strings
+        vipAgent: string (optional)
+        leadersAlwaysAllowed: bool (optional)
+        goalTag: string (optional)
+        icon: string (optional)
+		seed: int (optional)
+		maxWaveNum: int (optional)
+        fxLayer: string (optional)
+        eomBoss: string (optional)
+        exclusiveWeapon: string (optional)
 		missionReward: object
 			credits: int
 			items: list 
@@ -186,5 +342,8 @@ Alert: list of objects
 			countedItems: list of objects
 				ItemType: string (path)
 				ItemCount: int
+            randomizedItems: string (optional)
 			probablysomemorestuff: other
+    ForceUnlock: bool (optional)
+    Tag: string (optional)
 */

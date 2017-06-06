@@ -1,6 +1,4 @@
 ﻿High priority:
--- Add tag and description for Gift of the Lotus and Design Council Challenge alerts
-
 -- ASP.NET Web app:
   ?? Kinda sorta in-progress
   -- Read up on AJAX UpdatePanel, Timer, and ScriptManager for dynamically updating stuff (Design view of .aspx -> Toolbox)
@@ -17,6 +15,8 @@
 ?? (Ongoing) Check PVP Challenges for consistency of numbers and add new types
 
 Low priority:
+-- Add an option to read WorldState from a file, for testing purposes
+
 -- Maybe for default class constructors, fill the item with default values?
 
 -- Maybe rethink properties and private m_- variables. Could replace them with a { get; private set; } property maybe?
@@ -53,6 +53,7 @@ xx convert m_messages in Event.cs to a Dictionary maybe
 xx Modify getters for Alert/Invasion/etc. properties to map things such as SolNodes/missionTypes/etc. where applicable
   xx maybe for things I map have r_<var> for the raw data and <var> for prettified data?
   xx for Invasion Tuples, maybe make a new Tuple<string, int> with the mapped name as the string component?
+xx Add tag and description for Gift of the Lotus and Design Council Challenge alerts
 
 In limbo:
 ?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround
