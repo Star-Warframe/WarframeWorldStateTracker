@@ -242,8 +242,8 @@ namespace WarframeWorldStateTest
                 return m_projectPct;
             }
         }
-        long m_worldSeed = 0; // World seed
-        public long worldSeed
+        string m_worldSeed = ""; // World seed
+        public string worldSeed
         {
             get
             {
@@ -594,7 +594,7 @@ namespace WarframeWorldStateTest
                 Console.WriteLine(e.StackTrace);
             }
 
-            m_worldSeed = worldStatePhpJson["WorldSeed"].ToObject<long>();
+            m_worldSeed = worldStatePhpJson["WorldSeed"].ToString();
         }
 
         private string getWorldStateString()

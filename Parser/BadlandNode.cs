@@ -66,7 +66,7 @@ namespace WarframeWorldStateTest
                 foreach (JObject jobj in bn["History"])
                     m_history.Add(new BadlandHistory(jobj));
             m_node = bn["Node"].ToString();
-            m_postConflictCooldown = WorldStateHelper.unixTimeToDateTime(bn["PostConflictCooldown"]["$date"]["$numberLong"].ToObject<long>());
+            if (bn["PostConflictCooldown"] != null) { m_postConflictCooldown = WorldStateHelper.unixTimeToDateTime(bn["PostConflictCooldown"]["$date"]["$numberLong"].ToObject<long>()); }
         }
 
         public override string ToString()

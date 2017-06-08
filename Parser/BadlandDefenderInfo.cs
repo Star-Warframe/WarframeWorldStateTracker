@@ -212,33 +212,31 @@ namespace WarframeWorldStateTest
 
         public BadlandDefenderInfo(JObject bd)
         {
-            m_creditsTaxRate = bd["CreditsTaxRate"].ToObject<int>();
-            m_memberCreditsTaxRate = bd["MemberCreditsTaxRate"].ToObject<int>();
-            m_itemsTaxRate = bd["ItemsTaxRate"].ToObject<int>();
-            m_memberItemsTaxRate = bd["MemberItemsTaxRate"].ToObject<int>();
-            m_taxChangeAllowedTime = WorldStateHelper.unixTimeToDateTime(bd["TaxChangeAllowedTime"]["$date"]["$numberLong"].ToObject<long>());
-            m_isAlliance = bd["IsAlliance"].ToObject<bool>();
-            m_defenderId = bd["Id"]["$oid"].ToString();
-            m_name = bd["Name"].ToString();
-            m_strengthRemaining = bd["StrengthRemaining"].ToObject<int>();
-            m_maxStrength = bd["MaxStrength"].ToObject<int>();
-            m_deploymentActivationTime = WorldStateHelper.unixTimeToDateTime(bd["DeploymentActivationTime"]["$date"]["$numberLong"].ToObject<long>());
-            m_railType = bd["RailType"].ToString();
-            m_motd = bd["MOTD"].ToString();
-            m_deployerName = bd["DeployerName"].ToString();
-            if (bd["DeployerClan"] != null) // why are these values sometimes null tho
-                m_deployerClan = bd["DeployerClan"].ToString();
-            m_railHealReserve = bd["RailHealReserve"].ToObject<int>();
-            m_healRate = bd["HealRate"].ToObject<double>();
-            m_damagePerMission = bd["DamagePerMission"].ToObject<int>();
-            m_battlePayReserve = bd["BattlePayReserve"].ToObject<int>();
-            m_missionBattlePay = bd["MissionBattlePay"].ToObject<int>();
-            m_battlePaySetBy = bd["BattlePaySetBy"].ToString();
-            if (bd["BattlePaySetByClan"] != null)
-                m_battlePaySetByClan = bd["BattlePaySetByClan"].ToString();
-            m_taxLastChangedBy = bd["TaxLastChangedBy"].ToString();
-            if (bd["TaxLastChangedByClan"] != null)
-                m_taxLastChangedByClan = bd["TaxLastChangedByClan"].ToString();
+            // might as well just check everything for null...
+            if (bd["CreditsTaxRate"] != null) { m_creditsTaxRate = bd["CreditsTaxRate"].ToObject<int>(); }
+            if (bd["MemberCreditsTaxRate"] != null) { m_memberCreditsTaxRate = bd["MemberCreditsTaxRate"].ToObject<int>(); }
+            if (bd["ItemsTaxRate"] != null) { m_itemsTaxRate = bd["ItemsTaxRate"].ToObject<int>(); }
+            if (bd["MemberItemsTaxRate"] != null) { m_memberItemsTaxRate = bd["MemberItemsTaxRate"].ToObject<int>(); }
+            if (bd["TaxChangeAllowedTime"] != null) { m_taxChangeAllowedTime = WorldStateHelper.unixTimeToDateTime(bd["TaxChangeAllowedTime"]["$date"]["$numberLong"].ToObject<long>()); }
+            if (bd["IsAlliance"] != null) { m_isAlliance = bd["IsAlliance"].ToObject<bool>(); }
+            if (bd["Id"] != null) { m_defenderId = bd["Id"]["$oid"].ToString(); }
+            if (bd["Name"] != null) { m_name = bd["Name"].ToString(); }
+            if (bd["StrengthRemaining"] != null) { m_strengthRemaining = bd["StrengthRemaining"].ToObject<int>(); }
+            if (bd["MaxStrength"] != null) { m_maxStrength = bd["MaxStrength"].ToObject<int>(); }
+            if (bd["DeploymentActivationTime"] != null) { m_deploymentActivationTime = WorldStateHelper.unixTimeToDateTime(bd["DeploymentActivationTime"]["$date"]["$numberLong"].ToObject<long>()); }
+            if (bd["RailType"] != null) { m_railType = bd["RailType"].ToString(); }
+            if (bd["MOTD"] != null) { m_motd = bd["MOTD"].ToString(); }
+            if (bd["DeployerName"] != null) { m_deployerName = bd["DeployerName"].ToString(); }
+            if (bd["DeployerClan"] != null) { m_deployerClan = bd["DeployerClan"].ToString(); }
+            if (bd["RailHealReserve"] != null) { m_railHealReserve = bd["RailHealReserve"].ToObject<int>(); }
+            if (bd["HealRate"] != null) { m_healRate = bd["HealRate"].ToObject<double>(); }
+            if (bd["DamagePerMission"] != null) { m_damagePerMission = bd["DamagePerMission"].ToObject<int>(); }
+            if (bd["BattlePayReserve"] != null) { m_battlePayReserve = bd["BattlePayReserve"].ToObject<int>(); }
+            if (bd["MissionBattlePay"] != null) { m_missionBattlePay = bd["MissionBattlePay"].ToObject<int>();}
+            if (bd["BattlePaySetBy"] != null) { m_battlePaySetBy = bd["BattlePaySetBy"].ToString(); }
+            if (bd["BattlePaySetByClan"] != null) { m_battlePaySetByClan = bd["BattlePaySetByClan"].ToString(); }
+            if (bd["TaxLastChangedBy"] != null) { m_taxLastChangedBy = bd["TaxLastChangedBy"].ToString(); }
+            if (bd["TaxLastChangedByClan"] != null) { m_taxLastChangedByClan = bd["TaxLastChangedByClan"].ToString(); }
         }
     }
 }
