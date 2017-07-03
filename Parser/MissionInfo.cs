@@ -193,6 +193,14 @@ namespace WarframeWorldStateTest
                 return m_goalTag;
             }
         }
+        private string m_icon = "";
+        public string icon
+        {
+            get
+            {
+                return m_icon;
+            }
+        }
 		private int m_seed = 0;
 		public int seed
 		{
@@ -265,20 +273,20 @@ namespace WarframeWorldStateTest
 
 		public MissionInfo(JObject mi)
 		{
-			m_missionType = mi["missionType"].ToString();
-			m_faction = mi["faction"].ToString();
-			m_location = mi["location"].ToString();
-			m_levelOverride = mi["levelOverride"].ToString();
-			m_enemySpec = mi["enemySpec"].ToString();
+            if (mi["missionType"] != null) { m_missionType = mi["missionType"].ToString(); }
+            if (mi["faction"] != null) { m_faction = mi["faction"].ToString(); }
+            if (mi["location"] != null) { m_location = mi["location"].ToString(); }
+            if (mi["levelOverride"] != null) { m_levelOverride = mi["levelOverride"].ToString(); }
+            if (mi["enemySpec"] != null) { m_enemySpec = mi["enemySpec"].ToString(); }
             if (mi["extraEnemySpec"] != null) { m_extraEnemySpec = mi["extraEnemySpec"].ToString(); }
             if (mi["customAdvancedSpawners"] != null)
             {
                 foreach (JValue jval in mi["customAdvancedSpawners"])
                     m_customAdvancedSpawners.Add(jval.ToString());
             }
-			m_minEnemyLevel = mi["minEnemyLevel"].ToObject<int>();
-			m_maxEnemyLevel = mi["maxEnemyLevel"].ToObject<int>();
-			m_difficulty = mi["difficulty"].ToObject<double>();
+            if (mi["minEnemyLevel"] != null) { m_minEnemyLevel = mi["minEnemyLevel"].ToObject<int>(); }
+            if (mi["maxEnemyLevel"] != null) { m_maxEnemyLevel = mi["maxEnemyLevel"].ToObject<int>(); }
+            if (mi["difficulty"] != null) { m_difficulty = mi["difficulty"].ToObject<double>(); }
             if (mi["archwingRequired"] != null) { m_archwingRequired = mi["archwingRequired"].ToObject<bool>(); }
             if (mi["requiredItems"] != null)
             {
@@ -290,12 +298,13 @@ namespace WarframeWorldStateTest
             if (mi["vipAgent"] != null) { m_vipAgent = mi["vipAgent"].ToString(); }
             if (mi["leadersAlwaysAllowed"] != null) { m_leadersAlwaysAllowed = mi["leadersAlwaysAllowed"].ToObject<bool>(); }
             if (mi["goalTag"] != null) { m_goalTag = mi["goalTag"].ToString(); }
+            if (mi["icon"] != null) { m_icon = mi["icon"].ToString(); }
             if (mi["seed"] != null) { m_seed = mi["seed"].ToObject<int>(); }
             if (mi["maxWaveNum"] != null) { m_maxWaveNum = mi["maxWaveNum"].ToObject<int>(); }
             if (mi["fxLayer"] != null) { m_fxLayer = mi["fxLayer"].ToString(); }
             if (mi["eomBoss"] != null) { m_eomBoss = mi["eomBoss"].ToString(); }
             if (mi["exclusiveWeapon"] != null) { m_exclusiveWeapon = mi["exclusiveWeapon"].ToString(); }
-			m_missionReward = new MissionReward((JObject)mi["missionReward"]);
+            if (mi["missionReward"] != null) { m_missionReward = new MissionReward((JObject)mi["missionReward"]); }
 		}
 	}
 }

@@ -351,7 +351,7 @@ namespace WarframeWorldStateTest
             if (go["ScoreMaxTag"] != null) { m_scoreMaxTag = go["ScoreMaxTag"].ToString(); }
             if (go["ScoreLocTag"] != null) { m_scoreLocTag = go["ScoreLocTag"].ToString(); }
             m_desc = go["Desc"].ToString();
-            m_toolTip = go["ToolTip"].ToString();
+            if (go["ToolTip"] != null) { m_toolTip = go["ToolTip"].ToString(); }
             m_icon = go["Icon"].ToString();
             if (go["RegionDrops"] != null)
             {

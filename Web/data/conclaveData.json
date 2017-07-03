@@ -29,6 +29,7 @@
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsHeadShotsEASY": "Get 1 headshot kill",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsHeadShotsMEDIUM": "Get 4 headshot kills",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsMeleeEASY": "Get 1 melee kill",
+	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsMeleeMEDIUM": "Get 4 melee kills",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsMeleeHARD": "Get 3 melee kills in a match",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsMultiMEDIUM": "Kill 4 opponents using melee, guns, and powers",
 	"/Lotus/PVPChallengeTypes/PVPTimedChallengeKillsPaybackEASY": "Kill 1 enemy that has killed you",

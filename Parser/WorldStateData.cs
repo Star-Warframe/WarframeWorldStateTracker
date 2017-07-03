@@ -17,6 +17,8 @@ namespace WarframeWorldStateTest
     public class WorldStateData
     {
         # region variables
+        public const int PC = 0, PS4 = 1, XBOX1 = 2;
+
         private Dictionary<string, string> worldStateUrls = new Dictionary<string, string>
         {
             { "pc", "http://content.warframe.com/dynamic/worldState.php" },
@@ -257,6 +259,54 @@ namespace WarframeWorldStateTest
          */
         public WorldStateData()
         {
+            setup();
+        }
+
+        public WorldStateData(int platform)
+        {
+            switch (platform)
+            {
+                case 0:
+                    {
+                        wsUrl = "pc";
+                        break;
+                    }
+                case 1:
+                    {
+                        wsUrl = "ps4";
+                        break;
+                    }
+                case 2:
+                    {
+                        wsUrl = "xb1";
+                        break;
+                    }
+                default:
+                    {
+                        wsUrl = "pc";
+                        break;
+                    }
+            }
+            setup();
+        }
+
+        public WorldStateData(string filename)  // for testing saved worldStates
+        {
+            if (System.IO.File.Exists(filename))
+            {
+                worldStatePhpString = System.IO.File.ReadAllText(filename);
+                worldStatePhpJson = JObject.Parse(worldStatePhpString);
+                parseWorldState();
+            }
+            else
+            {
+                Console.WriteLine("Could not open file " + filename);
+                setup();
+            }
+        }
+
+        private void setup()
+        {
 #if DEBUG
             Stopwatch st = Stopwatch.StartNew();
 #endif
@@ -266,15 +316,6 @@ namespace WarframeWorldStateTest
             st.Stop();
             Console.WriteLine("Retrieved and parsed WorldState in " + st.ElapsedMilliseconds + "ms");
 #endif
-        }
-
-        public WorldStateData(string platform)  // todo: maybe add a class to specify platforms by name so something like "new WorldStateData(GamePlatform.XBOX1)" can be done
-        {
-            string p = platform.ToLower();
-            if (worldStateUrls.ContainsKey(p))
-            {
-                wsUrl = worldStateUrls[p];
-            }
         }
 
         /*

@@ -12,14 +12,25 @@ namespace WarframeWorldStateTest
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            WorldStateData wsdata = new WorldStateData();
+            WorldStateData wsdata;
+            bool update = true;
 
-            Form1 form = new Form1(wsdata);
+            if (args.Length > 0)    // for debugging
+            {
+                wsdata = new WorldStateData(args[0]);
+                update = false;
+            }
+            else
+            {
+                wsdata = new WorldStateData();
+            }
+
+            Form1 form = new Form1(wsdata, update);
             //Form2 form2 = new Form2(wsdata);  // not needed since a Form2 is declared on Form1_Load
 
             Application.Run(form);

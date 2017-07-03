@@ -19,24 +19,33 @@ namespace WorldStateWeb
         {
             //wsdata = new WarframeWorldStateTest.WorldStateData();
 
-            alerts.AppendLine("<ul>");
+            //alerts.AppendLine("<ul>");
             foreach (WarframeWorldStateTest.Alert alert in Global.wsdata.alerts)
             {
-                alerts.AppendLine("<li>");
+                //alerts.AppendLine("<li>");
+                alerts.AppendLine("<tr>");
+                alerts.AppendLine("<td>");
                 //alerts.Append(alert.ToString());
-                alerts.Append(alert.missionInfo.location + " | ");
+                alerts.Append(alert.missionInfo.location/* + " | "*/ + "</td>");
+                alerts.AppendLine("<td>");
                 alerts.Append(alert.missionInfo.missionType);
-                alerts.Append(" (" + alert.missionInfo.faction + " lvl " + alert.missionInfo.minEnemyLevel + "-" + alert.missionInfo.maxEnemyLevel + ") | ");
-                alerts.Append(alert.missionInfo.missionReward.credits + " credits | ");
-                foreach(Tuple<string, int> t in alert.missionInfo.missionReward.countedItems)
+                alerts.Append(" (" + alert.missionInfo.faction + " lvl " + alert.missionInfo.minEnemyLevel + "-" + alert.missionInfo.maxEnemyLevel/* + ") | "*/ + ") </td>");
+                TimeSpan tte = alert.expiryDate - DateTime.UtcNow;
+                alerts.Append("<td>");
+                alerts.Append((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                //alerts.AppendLine("</li>");
+                alerts.AppendLine("</td>");
+                alerts.Append("<td>");
+                alerts.Append(alert.missionInfo.missionReward.credits + " credits"/* + " | "*/ + "</td>");
+                alerts.Append("<td>");
+                foreach (Tuple<string, int> t in alert.missionInfo.missionReward.countedItems)
                 {
                     alerts.Append(t.Item2 + " " + t.Item1 + " | ");
                 }
-                TimeSpan tte = alert.expiryDate - DateTime.UtcNow;
-                alerts.Append((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
-                alerts.AppendLine("</li>");
+                alerts.Append("</td>");
+                alerts.AppendLine("</tr>");
             }
-            alerts.AppendLine("</ul>");
+            //alerts.AppendLine("</ul>");
 
             foreach (WarframeWorldStateTest.Sorties sortie in Global.wsdata.sorties)
             {

@@ -1,11 +1,15 @@
 ﻿High priority:
 -- ASP.NET Web app:
   ?? Kinda sorta in-progress
+  -- Format list items (Alert, Sortie, Invasion, etc.) as tables where necessary
   -- Read up on AJAX UpdatePanel, Timer, and ScriptManager for dynamically updating stuff (Design view of .aspx -> Toolbox)
+    -- Looks like I'll probably need to use JS for dynamically adding new things as they come up in the worldState
   -- Maybe use MVC instead of just a blank ASP.NET project
   -- Add lock of some sort to wsdata in Global.asax to make access thread safe
   -- Move some of the code from Default.aspx.cs to application level
   -- Get rid of contact page maybe
+
+-- Keep an eye on the worldstate php, new object called "ConstructionProjects"
 
 -- Might as well make a mapper for all the .json things in data folder
 
@@ -15,8 +19,6 @@
 ?? (Ongoing) Check PVP Challenges for consistency of numbers and add new types
 
 Low priority:
--- Add an option to read WorldState from a file, for testing purposes
-
 -- Maybe for default class constructors, fill the item with default values?
 
 -- Maybe rethink properties and private m_- variables. Could replace them with a { get; private set; } property maybe?
@@ -54,6 +56,8 @@ xx Modify getters for Alert/Invasion/etc. properties to map things such as SolNo
   xx maybe for things I map have r_<var> for the raw data and <var> for prettified data?
   xx for Invasion Tuples, maybe make a new Tuple<string, int> with the mapped name as the string component?
 xx Add tag and description for Gift of the Lotus and Design Council Challenge alerts
+xx Add an option to read WorldState from a file, for testing purposes
+  xx Also added an option to disable auto-updating every minute for Desktop app
 
 In limbo:
 ?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround

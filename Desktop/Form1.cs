@@ -13,9 +13,12 @@ namespace WarframeWorldStateTest
     public partial class Form1 : Form
     {
         WorldStateData wsdata;
+        bool autoUpdate = true;
 
-        public Form1(WorldStateData ws)
+        public Form1(WorldStateData ws, bool update = true)
         {
+            autoUpdate = update;
+
             InitializeComponent();
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";
@@ -244,7 +247,7 @@ namespace WarframeWorldStateTest
         {
             label1.Text = "Current time: " + DateTime.Now.ToString("hh:mm:ss tt");
 
-            if ((DateTime.Now.Second % 60) == 0)    // refresh every 60 seconds with timer interval of 1000
+            if (autoUpdate && (DateTime.Now.Second % 60) == 0)    // refresh every 60 seconds with timer interval of 1000
             {
                 wsdata.refreshWorldState();
                 comboBox1_SelectionChangeCommitted(null, null);
