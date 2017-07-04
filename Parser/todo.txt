@@ -1,12 +1,13 @@
 ﻿High priority:
 -- ASP.NET Web app:
   ?? Kinda sorta in-progress
-  -- Format list items (Alert, Sortie, Invasion, etc.) as tables where necessary
+  ?? Format list items (Alert, Sortie, Invasion, etc.) as tables where necessary (in progress, should look up CSS/general web design stuff to make them prettier)
+  -- Add Void Traders, Darvo Deals, PVP Challenges, Invasion event status
+  -- Add error checks to make sure the entire page doesn't crash if one of the lists/list items breaks
   -- Read up on AJAX UpdatePanel, Timer, and ScriptManager for dynamically updating stuff (Design view of .aspx -> Toolbox)
     -- Looks like I'll probably need to use JS for dynamically adding new things as they come up in the worldState
-  -- Maybe use MVC instead of just a blank ASP.NET project
+  -- Maybe use MVC instead of just a blank ASP.NET project (nahhh...)
   -- Add lock of some sort to wsdata in Global.asax to make access thread safe
-  -- Move some of the code from Default.aspx.cs to application level
   -- Get rid of contact page maybe
 
 -- Keep an eye on the worldstate php, new object called "ConstructionProjects"
@@ -22,7 +23,7 @@ Low priority:
 -- Maybe for default class constructors, fill the item with default values?
 
 -- Maybe rethink properties and private m_- variables. Could replace them with a { get; private set; } property maybe?
-  -- Might as well keep it consistent for now
+  ?? Might as well keep it consistent for now
 
 -- Re-learn delegates and events and stuff and allow the button press to refresh the worldState in both windows
 
@@ -58,6 +59,7 @@ xx Modify getters for Alert/Invasion/etc. properties to map things such as SolNo
 xx Add tag and description for Gift of the Lotus and Design Council Challenge alerts
 xx Add an option to read WorldState from a file, for testing purposes
   xx Also added an option to disable auto-updating every minute for Desktop app
+xx Move some of the code from Default.aspx.cs to application level
 
 In limbo:
 ?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround
