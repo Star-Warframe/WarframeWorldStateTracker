@@ -2,12 +2,13 @@
 -- ASP.NET Web app:
   ?? Kinda sorta in-progress
   ?? Format list items (Alert, Sortie, Invasion, etc.) as tables where necessary (in progress, should look up CSS/general web design stuff to make them prettier)
+	-- Tables are temporary, should make them something else in the future for better formatting options
   -- Add Void Traders, Darvo Deals, PVP Challenges, Invasion event status
+	-- Test out Void Traders section on a day when Baro is available
   -- Add error checks to make sure the entire page doesn't crash if one of the lists/list items breaks
   -- Read up on AJAX UpdatePanel, Timer, and ScriptManager for dynamically updating stuff (Design view of .aspx -> Toolbox)
     -- Looks like I'll probably need to use JS for dynamically adding new things as they come up in the worldState
-  -- Maybe use MVC instead of just a blank ASP.NET project (nahhh...)
-  -- Add lock of some sort to wsdata in Global.asax to make access thread safe
+  -- Add lock of some sort to wsdata in Global.asax to make access thread safe (or to ensure blank/bad data isn't loaded if a refresh happens while wsdata and other things are being rebuilt)
   -- Get rid of contact page maybe
 
 -- Keep an eye on the worldstate php, new object called "ConstructionProjects"

@@ -14,10 +14,17 @@ namespace WorldStateWeb
     public class Global : HttpApplication
     {
         public static WorldStateData wsdata { get; private set; }
-        public static System.Text.StringBuilder alerts = new System.Text.StringBuilder();
-        public static System.Text.StringBuilder sorties = new System.Text.StringBuilder();
-        public static System.Text.StringBuilder invasions = new System.Text.StringBuilder();
-        public static System.Text.StringBuilder fissures = new System.Text.StringBuilder();
+        public static System.Text.StringBuilder alerts = new System.Text.StringBuilder();           // Alerts
+        public static System.Text.StringBuilder sorties = new System.Text.StringBuilder();          // Sorties
+        public static System.Text.StringBuilder invasions = new System.Text.StringBuilder();        // Invasions
+        public static System.Text.StringBuilder fissures = new System.Text.StringBuilder();         // Fissures
+        public static System.Text.StringBuilder voidTraders = new System.Text.StringBuilder();      // Salt Trader
+        public static System.Text.StringBuilder invEventStat = new System.Text.StringBuilder();     // Invasion event progress
+        public static System.Text.StringBuilder events = new System.Text.StringBuilder();           // Events (News)
+        public static System.Text.StringBuilder darvoDeal = new System.Text.StringBuilder();        // Daily Darvo Deal
+        public static System.Text.StringBuilder pvpChallenges = new System.Text.StringBuilder();    // PVP Challenges
+        public static System.Text.StringBuilder flashSales = new System.Text.StringBuilder();       // Flash Sales (featured market stuff)
+        public static System.Text.StringBuilder nodeOverrides = new System.Text.StringBuilder();    // Node overrides (excluding destroyed relays)
 
         void Application_Start(object sender, EventArgs e)
         {
@@ -48,11 +55,26 @@ namespace WorldStateWeb
             sorties.Clear();
             invasions.Clear();
             fissures.Clear();
+            voidTraders.Clear();
+            invEventStat.Clear();
+            events.Clear();
+            darvoDeal.Clear();
+            pvpChallenges.Clear();
+            flashSales.Clear();
+            nodeOverrides.Clear();
 
+            // todo trycatch stuff
             createAlerts();
             createSorties();
             createInvasions();
             createFissures();
+            createVoidTraders();
+            createInvEventStats();
+            createEvents();
+            //createDarvoDeals();
+            //createPvpChallenges();
+            //createFlashSales();
+            //createNodeOverrides();
         }
 
         void createAlerts()
@@ -166,6 +188,91 @@ namespace WorldStateWeb
                 TimeSpan tte = fissure.expiry - DateTime.UtcNow;
                 fissures.Append("<td>" + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left") + "</td>");
                 fissures.AppendLine("</tr>");
+            }
+        }
+
+        void createVoidTraders()
+        {
+            VoidTrader v = wsdata.voidTraders.First();
+            voidTraders.Append("<tr><th colspan=\"3\">Baro Ki'Teer</th></tr>");
+            voidTraders.Append("<tr><th colspan=\"3\">");
+            // if active, show location, departure time and list his stuff
+            if (v.activation <= DateTime.UtcNow && v.expiry >= DateTime.UtcNow)
+            {
+                voidTraders.Append("Active at ");
+                voidTraders.Append(v.node);
+                voidTraders.Append(" for ");
+                TimeSpan tte = v.expiry - DateTime.UtcNow;
+                voidTraders.Append((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
+                    + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "")
+                    + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+                voidTraders.Append("</th></tr>");
+                foreach(Tuple<string, int, int> t in v.manifest)
+                {
+                    voidTraders.Append("<tr>");
+                    voidTraders.Append("<td>" + t.Item1 + "</td>");
+                    voidTraders.Append("<td>" + t.Item2 + " ducats</td>");
+                    voidTraders.Append("<td>" + t.Item3 + " credits</td>");
+                    voidTraders.Append("</tr>");
+                }
+            }
+            // if inactive, say as much and show location, arrival time
+            else
+            {
+                voidTraders.Append("Arriving at ");
+                voidTraders.Append(v.node);
+                voidTraders.Append(" in ");
+                TimeSpan tte = v.activation - DateTime.UtcNow;
+                voidTraders.Append((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
+                    + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") 
+                    + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+                voidTraders.Append("</th></tr>");
+            }
+        }
+
+        void createInvEventStats()
+        {
+            // [0] is for Fomorian, [1] is for Razorback
+            string grinPct = wsdata.projectPct[0].ToString("N1") + "%";
+            string grinRemain = (100.0 - wsdata.projectPct[0]).ToString("N1") + "%";
+            string corpPct = wsdata.projectPct[1].ToString("N1") + "%";
+            string corpRemain = (100.0 - wsdata.projectPct[1]).ToString("N1") + "%";
+            invEventStat.Append("<div style=\"height: 80px\">");
+            invEventStat.Append("<span>Fomorian</span></br>");
+            invEventStat.Append(grinPct);
+            invEventStat.Append("<div id=\"percent-bar\">");
+            invEventStat.Append("<div class=\"progress-percent progress-done grineer\" style=\"width: " + grinPct + "\"></div>");
+            invEventStat.Append("<div class=\"progress-percent progress-remaining\" style=\"width: " + grinRemain + "\"></div>");
+            invEventStat.Append("</div>");
+            invEventStat.Append("</div>");
+
+            invEventStat.Append("<div style=\"height: 80px\">");
+            invEventStat.Append("<span>Razorback Armada</span></br>");
+            invEventStat.Append(corpPct);
+            invEventStat.Append("<div id=\"percent-bar\">");
+            invEventStat.Append("<div class=\"progress-percent progress-done corpus\" style=\"width: " + corpPct + "\"></div>");
+            invEventStat.Append("<div class=\"progress-percent progress-remaining\" style=\"width: " + corpRemain + "\"></div>");
+            invEventStat.Append("</div>");
+            invEventStat.Append("</div>");
+        }
+
+        void createEvents()
+        {
+            foreach (Event e in wsdata.events)
+            {
+                events.Append("<div class=\"newsbox\">");
+                TimeSpan timeUp = DateTime.UtcNow - e.date;
+                string message = "";
+                foreach (var m in e.messages)
+                {
+                    if (m.Key == "en")
+                    {
+                        message = m.Value;
+                    }
+                }
+                events.Append("<span>(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + message + "</span></br>");
+                events.Append("<a href=" + e.prop + ">" + e.prop + "</a>");
+                events.Append("</div>");
             }
         }
 

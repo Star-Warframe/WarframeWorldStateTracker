@@ -353,3 +353,5 @@ PVPActiveTournaments: list (empty)
 
 ProjectPct (no idea): list 
 	of doubles (or floats)
+
+ConstructionProjects: list (empty)

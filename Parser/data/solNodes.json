@@ -312,7 +312,7 @@
   , "SolNode62": {
 	"value": "Neso (Neptune)",
 	"enemy": "Corpus",
-	"type" : "Proteus"
+	"type" : "Exterminate"
   }
   , "SolNode63": {
 	"value": "Mantle (Earth)",
@@ -1447,6 +1447,11 @@
   , "PlutoHUB": {
 	"value": "Orcus Relay (Pluto)",
 	"enemy": "Corpus",
+	"type" : "Relay"
+  }
+  , "TennoConHUB2": {
+	"value": "TennoCon Relay",
+	"enemy": "N/A",
 	"type" : "Relay"
   }
   , "EventNode0": {

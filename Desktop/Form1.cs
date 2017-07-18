@@ -15,14 +15,42 @@ namespace WarframeWorldStateTest
         WorldStateData wsdata;
         bool autoUpdate = true;
 
+        public Form1()
+        {
+            wsdata = new WorldStateData();
+
+            InitializeComponent();
+
+            setup();
+        }
+
+        public Form1(string filename)
+        {
+            wsdata = new WorldStateData(filename);
+
+            autoUpdate = false;
+
+            InitializeComponent();
+
+            setup();
+        }
+
         public Form1(WorldStateData ws, bool update = true)
         {
             autoUpdate = update;
 
             InitializeComponent();
+
+            wsdata = ws;
+
+            setup();
+        }
+
+        private void setup()
+        {
+            checkBox1.Checked = autoUpdate;
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";
-            wsdata = ws;
             comboBox1.DataSource = new BindingSource(wsdata.varList, null);
 
             comboBox2.DisplayMember = "Value";
@@ -38,7 +66,7 @@ namespace WarframeWorldStateTest
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms.OfType<Form2>().Count() >= 1)
+            if (Application.OpenForms.OfType<Form2>().Count() >= 1)     // close and reopen Form2 if one already exists
             {
                 Application.OpenForms.OfType<Form2>().ElementAt(0).Close();
             }
@@ -51,7 +79,7 @@ namespace WarframeWorldStateTest
             comboBox1.SelectedIndex = 0;
             comboBox1_SelectionChangeCommitted(null, null);
             comboBox2.SelectedIndex = 0;
-            label1.Text = "Current time: " + DateTime.Now.ToString("hh:mm:ss tt");
+            label1.Text = DateTime.Now.ToString("hh:mm:ss tt");
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -245,7 +273,7 @@ namespace WarframeWorldStateTest
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label1.Text = "Current time: " + DateTime.Now.ToString("hh:mm:ss tt");
+            label1.Text = DateTime.Now.ToString("hh:mm:ss tt");
 
             if (autoUpdate && (DateTime.Now.Second % 60) == 0)    // refresh every 60 seconds with timer interval of 1000
             {

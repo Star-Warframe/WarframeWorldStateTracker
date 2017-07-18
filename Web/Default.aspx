@@ -1,39 +1,53 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WorldStateWeb._Default" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1><%: Title %></h1>
-            </hgroup>
-        </div>
-    </section>
-</asp:Content>
+    </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-        <div id="alerts">
-            <h3>Alerts:</h3> 
-            <table>
-                <%= alerts.ToString() %>
-            </table>
+    <div class="main-content-container">
+    <div id="alerts">
+        <h1>Alerts</h1> 
+        <table>
+            <%= alerts.ToString() %>
+        </table>
+    </div>
+    <div id="sorties">
+        <h1>Sorties</h1>
+        <table>
+            <%= sorties.ToString() %>
+        </table>
+    </div>
+    <div id="invasions">
+        <h1>Invasions</h1>
+        <table>
+            <%= invasions.ToString() %>
+        </table>
+    </div>
+    <div id="fissures">
+        <h1>Void Fissures</h1>
+        <table>
+            <%= fissures.ToString() %>
+        </table>
+    </div>
+    <div id="voidTraders">
+        <h1>Void Traders</h1>
+        <table>
+            <%= voidTraders.ToString() %>
+        </table>
+    </div>
+    <div id="invEventStat">
+        <h1>Invasion Event Progress</h1>
+        <div>
+            <%= invEventStat.ToString() %>
         </div>
-        <div id="sorties">
-            <h3>Sorties:</h3>
-            <table>
-                <%= sorties.ToString() %>
-            </table>
+    </div>
+    <div id="events">
+        <h1>Events (News)</h1>
+        <div>
+            <%= events.ToString() %>
         </div>
-        <div id="invasions">
-            <h3>Invasions:</h3>
-            <table>
-                <%= invasions.ToString() %>
-            </table>
-        </div>
-        <div id="fissures">
-            <h3>Void Fissures:</h3>
-            <table>
-                <%= fissures.ToString() %>
-            </table>
-        </div>
+    </div>
+    </div>
+
     <%--<ol class="round">
         <li class="one">
             <h5>Getting Started</h5>

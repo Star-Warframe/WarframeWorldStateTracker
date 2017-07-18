@@ -15,6 +15,9 @@ namespace WorldStateWeb
         protected System.Text.StringBuilder sorties = Global.sorties;
         protected System.Text.StringBuilder invasions = Global.invasions;
         protected System.Text.StringBuilder fissures = Global.fissures;
+        protected System.Text.StringBuilder voidTraders = Global.voidTraders;
+        protected System.Text.StringBuilder invEventStat = Global.invEventStat;
+        protected System.Text.StringBuilder events = Global.events;
 
         protected void Page_Load(object sender, EventArgs e)
         {
