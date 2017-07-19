@@ -94,11 +94,19 @@ namespace WarframeWorldStateTest
             }
         }
         private Tuple<int, string> m_attackerMissionInfo = new Tuple<int, string>(0, "");
-        public Tuple<int, string> attackerMissionInfo
+        public Tuple<int, string> r_attackerMissionInfo
         {
             get
             {
                 return m_attackerMissionInfo;
+            }
+        }
+        public Tuple<int, string> attackerMissionInfo
+        {
+            get
+            {
+                Tuple<int, string> returnMe = new Tuple<int, string>(m_attackerMissionInfo.Item1, MapFaction.getFaction(m_attackerMissionInfo.Item2));
+                return returnMe;
             }
         }
         private List<Tuple<string, int>> m_defenderReward = new List<Tuple<string, int>>();
@@ -122,11 +130,19 @@ namespace WarframeWorldStateTest
             }
         }
         private Tuple<int, string> m_defenderMissionInfo = new Tuple<int, string>(0, "");
-        public Tuple<int, string> defenderMissionInfo
+        public Tuple<int, string> r_defenderMissionInfo
         {
             get
             {
                 return m_defenderMissionInfo;
+            }
+        }
+        public Tuple<int, string> defenderMissionInfo
+        {
+            get
+            {
+                Tuple<int, string> returnMe = new Tuple<int, string>(m_defenderMissionInfo.Item1, MapFaction.getFaction(m_defenderMissionInfo.Item2));
+                return returnMe;
             }
         }
         private DateTime m_activation = new DateTime();
@@ -172,6 +188,10 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
+            // AttackerMissionInfo faction is defender faction and vice versa
+            string attacker = MapFaction.getFaction(m_defenderMissionInfo.Item2);
+            string defender = MapFaction.getFaction(m_attackerMissionInfo.Item2);
+
             str.AppendLine(MapSolNode.getNodeName(m_node));
             str.AppendLine(MapFaction.getFaction(m_faction) + " invasion" + (m_completed ? " (completed)" : ""));
             str.AppendLine("Activation: " + m_activation.ToLocalTime());
@@ -182,11 +202,11 @@ namespace WarframeWorldStateTest
                 str.Append("Completion: " + Math.Floor(Math.Abs(percentComplete * 100.0)) + "%");
                 if (percentComplete > 0)
                 {
-                    str.AppendLine(" (Advantage: attacker)");
+                    str.AppendLine(" (Advantage: " + attacker + ")");
                 }
                 else if (percentComplete < 0)
                 {
-                    str.AppendLine(" (Advantage: defender)");
+                    str.AppendLine(" (Advantage: " + defender + ")");
                 }
                 else
                 {

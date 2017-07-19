@@ -18,6 +18,7 @@ namespace WorldStateWeb
         protected System.Text.StringBuilder voidTraders = Global.voidTraders;
         protected System.Text.StringBuilder invEventStat = Global.invEventStat;
         protected System.Text.StringBuilder events = Global.events;
+        protected System.Text.StringBuilder darvoDeal = Global.darvoDeal;
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -4,46 +4,52 @@
     </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div class="main-content-container">
-    <div id="alerts">
+    <div id="alerts" class="content-element">
         <h1>Alerts</h1> 
         <table>
             <%= alerts.ToString() %>
         </table>
     </div>
-    <div id="sorties">
+    <div id="sorties" class="content-element">
         <h1>Sorties</h1>
         <table>
             <%= sorties.ToString() %>
         </table>
     </div>
-    <div id="invasions">
+    <div id="invasions" class="content-element">
         <h1>Invasions</h1>
         <table>
             <%= invasions.ToString() %>
         </table>
     </div>
-    <div id="fissures">
-        <h1>Void Fissures</h1>
-        <table>
-            <%= fissures.ToString() %>
-        </table>
-    </div>
-    <div id="voidTraders">
-        <h1>Void Traders</h1>
-        <table>
-            <%= voidTraders.ToString() %>
-        </table>
-    </div>
-    <div id="invEventStat">
+    <div id="invEventStat" class="content-element">
         <h1>Invasion Event Progress</h1>
         <div>
             <%= invEventStat.ToString() %>
         </div>
     </div>
-    <div id="events">
+    <div id="fissures" class="content-element">
+        <h1>Void Fissures</h1>
+        <table>
+            <%= fissures.ToString() %>
+        </table>
+    </div>
+    <div id="voidTraders" class="content-element">
+        <h1>Baro Ki'Teer</h1>
+        <table>
+            <%= voidTraders.ToString() %>
+        </table>
+    </div>
+    <div id="events" class="content-element">
         <h1>Events (News)</h1>
         <div>
             <%= events.ToString() %>
+        </div>
+    </div>
+    <div id="darvoDeal" class="content-element">
+        <h1>Daily Darvo Deal</h1>
+        <div>
+            <%= darvoDeal.ToString() %>
         </div>
     </div>
     </div>

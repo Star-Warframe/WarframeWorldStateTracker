@@ -9,7 +9,7 @@ body {
     /*border-top: solid 10px #000;*/
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: /*"Segoe UI"*/Helvetica, Verdana, Tahoma, Sans-Serif;
     margin: 0;
     padding: 0;
 }
@@ -17,8 +17,8 @@ body {
 a {
     color: #333;
     outline: none;
-    padding-left: 3px;
-    padding-right: 3px;
+    /*padding-left: 3px;
+    padding-right: 3px;*/
     text-decoration: underline;
 }
 
@@ -93,10 +93,15 @@ h5, h6 {
 
 /* site-specific items
 ----------------------------------------------------------*/
-#percent-bar {
+.content-element {
+    /*For if I ever want to replace the "div.main-content-container > div" markup*/
+}
+.percent-bar {
     height: 20px;
     width: inherit;
     border: solid 1px black;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .progress-percent {
@@ -112,11 +117,18 @@ h5, h6 {
 }
 
 .grineer {
-    background-color: red;
+    /*BD2A33 ingame*/
+    background-color: #C1000C;
 }
 
 .corpus {
-    background-color: blue;
+    /*2B5166 ingame*/
+    background-color: #0081C1;
+}
+
+.infested {
+    /*408156 ingame*/
+    background-color: #408156;
 }
 
 .newsbox {

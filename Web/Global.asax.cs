@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using System.Web.UI;
 using WorldStateWeb;
 using WarframeWorldStateTest;
 
@@ -71,7 +72,7 @@ namespace WorldStateWeb
             createVoidTraders();
             createInvEventStats();
             createEvents();
-            //createDarvoDeals();
+            createDarvoDeals();
             //createPvpChallenges();
             //createFlashSales();
             //createNodeOverrides();
@@ -146,18 +147,21 @@ namespace WorldStateWeb
             {
                 if (!invasion.completed)
                 {
+                    // AttackerMissionInfo faction is defender faction and vice versa
+                    string attacker = invasion.defenderMissionInfo.Item2;
+                    string defender = invasion.attackerMissionInfo.Item2;
                     invasions.Append("<tr>");
                     invasions.Append("<td>" + invasion.node + "</td>");
                     invasions.Append("<td>" + invasion.faction + " invasion</td>");
                     double percentComplete = ((double)invasion.count / (double)invasion.goal);
                     invasions.Append("<td>" + Math.Floor(Math.Abs(percentComplete * 100.0)) + "%");
-                    if (percentComplete > 0) { invasions.Append(" (Advantage: attacker)"); }
-                    else if (percentComplete < 0) { invasions.Append(" (Advantage: defender)"); }
+                    if (percentComplete > 0) { invasions.Append(" (Advantage: " + attacker + ")"); }
+                    else if (percentComplete < 0) { invasions.Append(" (Advantage: " + defender + ")"); }
                     else { invasions.Append(" (Tie)"); }
                     invasions.Append("</td>");
                     // Infested invasions don't have an attackerReward entry in the worldState so need to check for that
-                    invasions.Append("<td>Defender rewards: " + invasion.defenderReward.First().Item2 + " " + invasion.defenderReward.First().Item1 + "</td>");
-                    if (invasion.attackerReward.Count > 0) { invasions.Append("<td>Attacker rewards: " + invasion.attackerReward.First().Item2 + " " + invasion.attackerReward.First().Item1 + "</td>"); }
+                    invasions.Append("<td>" + defender + " rewards: " + invasion.defenderReward.First().Item2 + " " + invasion.defenderReward.First().Item1 + "</td>");
+                    if (invasion.attackerReward.Count > 0) { invasions.Append("<td>" + attacker + " rewards: " + invasion.attackerReward.First().Item2 + " " + invasion.attackerReward.First().Item1 + "</td>"); }
                     invasions.AppendLine("</tr>");
                 }
                 //invasions.AppendLine("<li>" + invasion.ToString() + "</li>");
@@ -194,7 +198,6 @@ namespace WorldStateWeb
         void createVoidTraders()
         {
             VoidTrader v = wsdata.voidTraders.First();
-            voidTraders.Append("<tr><th colspan=\"3\">Baro Ki'Teer</th></tr>");
             voidTraders.Append("<tr><th colspan=\"3\">");
             // if active, show location, departure time and list his stuff
             if (v.activation <= DateTime.UtcNow && v.expiry >= DateTime.UtcNow)
@@ -240,7 +243,7 @@ namespace WorldStateWeb
             invEventStat.Append("<div style=\"height: 80px\">");
             invEventStat.Append("<span>Fomorian</span></br>");
             invEventStat.Append(grinPct);
-            invEventStat.Append("<div id=\"percent-bar\">");
+            invEventStat.Append("<div class=\"percent-bar\">");
             invEventStat.Append("<div class=\"progress-percent progress-done grineer\" style=\"width: " + grinPct + "\"></div>");
             invEventStat.Append("<div class=\"progress-percent progress-remaining\" style=\"width: " + grinRemain + "\"></div>");
             invEventStat.Append("</div>");
@@ -249,7 +252,7 @@ namespace WorldStateWeb
             invEventStat.Append("<div style=\"height: 80px\">");
             invEventStat.Append("<span>Razorback Armada</span></br>");
             invEventStat.Append(corpPct);
-            invEventStat.Append("<div id=\"percent-bar\">");
+            invEventStat.Append("<div class=\"percent-bar\">");
             invEventStat.Append("<div class=\"progress-percent progress-done corpus\" style=\"width: " + corpPct + "\"></div>");
             invEventStat.Append("<div class=\"progress-percent progress-remaining\" style=\"width: " + corpRemain + "\"></div>");
             invEventStat.Append("</div>");
@@ -274,6 +277,11 @@ namespace WorldStateWeb
                 events.Append("<a href=" + e.prop + ">" + e.prop + "</a>");
                 events.Append("</div>");
             }
+        }
+
+        void createDarvoDeals()
+        {
+            darvoDeal.Append("<div id=\"todo\"></div>");
         }
 
         void Application_End(object sender, EventArgs e)
