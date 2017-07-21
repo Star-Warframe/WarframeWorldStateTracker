@@ -15,6 +15,7 @@ namespace WorldStateWeb
     public class Global : HttpApplication
     {
         public static WorldStateData wsdata { get; private set; }
+        private static WorldStateData wsdataCpy;
         public static System.Text.StringBuilder alerts = new System.Text.StringBuilder();           // Alerts
         public static System.Text.StringBuilder sorties = new System.Text.StringBuilder();          // Sorties
         public static System.Text.StringBuilder invasions = new System.Text.StringBuilder();        // Invasions
@@ -36,11 +37,13 @@ namespace WorldStateWeb
 
             // start a separate thread to update the WorldState data on a timer
             wsdata = new WarframeWorldStateTest.WorldStateData();
+            wsdataCpy = wsdata;
             Thread t = new Thread(delegate()
                 {
                     while (true)
                     {
-                        wsdata.refreshWorldState();
+                        wsdataCpy.refreshWorldState();
+                        wsdata = wsdataCpy;
                         createHtml();
 
                         Thread.Sleep(60000);    // refresh wsdata on a 1-minute interval
