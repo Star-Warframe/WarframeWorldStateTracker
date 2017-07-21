@@ -289,5 +289,11 @@ namespace WarframeWorldStateTest
             wsdata.refreshWorldState();
             comboBox1_SelectionChangeCommitted(null, null);
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            autoUpdate = checkBox1.Checked;
+            Console.WriteLine("Auto-refresh " + (autoUpdate ? "on" : "off"));
+        }
     }
 }
