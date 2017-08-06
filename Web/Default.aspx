@@ -7,49 +7,67 @@
     <div id="alerts" class="content-element">
         <h1>Alerts</h1> 
         <table>
-            <%= alerts.ToString() %>
+            <%= alerts.InnerWriter.ToString() %>
         </table>
     </div>
     <div id="sorties" class="content-element">
         <h1>Sorties</h1>
         <table>
-            <%= sorties.ToString() %>
+            <%= sorties.InnerWriter.ToString() %>
         </table>
     </div>
     <div id="invasions" class="content-element">
         <h1>Invasions</h1>
         <table>
-            <%= invasions.ToString() %>
+            <%= invasions.InnerWriter.ToString() %>
         </table>
     </div>
     <div id="invEventStat" class="content-element">
         <h1>Invasion Event Progress</h1>
         <div>
-            <%= invEventStat.ToString() %>
+            <%= invEventStat.InnerWriter.ToString() %>
         </div>
     </div>
     <div id="fissures" class="content-element">
         <h1>Void Fissures</h1>
         <table>
-            <%= fissures.ToString() %>
+            <%= fissures.InnerWriter.ToString() %>
         </table>
     </div>
     <div id="voidTraders" class="content-element">
         <h1>Baro Ki'Teer</h1>
         <table>
-            <%= voidTraders.ToString() %>
+            <%= voidTraders.InnerWriter.ToString() %>
         </table>
     </div>
     <div id="events" class="content-element">
         <h1>Events (News)</h1>
         <div>
-            <%= events.ToString() %>
+            <%= events.InnerWriter.ToString() %>
         </div>
     </div>
     <div id="darvoDeal" class="content-element">
         <h1>Daily Darvo Deal</h1>
         <div>
-            <%= darvoDeal.ToString() %>
+            <%= darvoDeal.InnerWriter.ToString() %>
+        </div>
+    </div>
+    <div id="pvpChallenges" class="content-element">
+        <h1>PVP Challenges</h1>
+        <div>
+            <%= pvpChallenges.InnerWriter.ToString() %>
+        </div>
+    </div>
+    <div id="flashSales" class="content-element">
+        <h1>Market Items and Flash Sales</h1>
+        <div>
+            <%= flashSales.InnerWriter.ToString() %>
+        </div>
+    </div>
+    <div id="nodeOverrides" class="content-element">
+        <h1>Node Overrides</h1>
+        <div>
+            <%= nodeOverrides.InnerWriter.ToString() %>
         </div>
     </div>
     </div>

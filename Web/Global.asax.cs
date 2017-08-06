@@ -16,17 +16,18 @@ namespace WorldStateWeb
     {
         public static WorldStateData wsdata { get; private set; }
         private static WorldStateData wsdataCpy;
-        public static System.Text.StringBuilder alerts = new System.Text.StringBuilder();           // Alerts
-        public static System.Text.StringBuilder sorties = new System.Text.StringBuilder();          // Sorties
-        public static System.Text.StringBuilder invasions = new System.Text.StringBuilder();        // Invasions
-        public static System.Text.StringBuilder fissures = new System.Text.StringBuilder();         // Fissures
-        public static System.Text.StringBuilder voidTraders = new System.Text.StringBuilder();      // Salt Trader
-        public static System.Text.StringBuilder invEventStat = new System.Text.StringBuilder();     // Invasion event progress
-        public static System.Text.StringBuilder events = new System.Text.StringBuilder();           // Events (News)
-        public static System.Text.StringBuilder darvoDeal = new System.Text.StringBuilder();        // Daily Darvo Deal
-        public static System.Text.StringBuilder pvpChallenges = new System.Text.StringBuilder();    // PVP Challenges
-        public static System.Text.StringBuilder flashSales = new System.Text.StringBuilder();       // Flash Sales (featured market stuff)
-        public static System.Text.StringBuilder nodeOverrides = new System.Text.StringBuilder();    // Node overrides (excluding destroyed relays)
+        public static HtmlTextWriter alerts { get; private set; }           // Alerts
+        public static HtmlTextWriter sorties { get; private set; }          // Sorties
+        public static HtmlTextWriter invasions { get; private set; }        // Invasions
+        public static HtmlTextWriter fissures { get; private set; }         // Fissures
+        public static HtmlTextWriter voidTraders { get; private set; }      // Salt Trader
+        public static HtmlTextWriter invEventStat { get; private set; }     // Invasion event progress
+        public static HtmlTextWriter events { get; private set; }           // Events (News)
+        public static HtmlTextWriter darvoDeal { get; private set; }        // Daily Darvo Deal
+        public static HtmlTextWriter pvpChallenges { get; private set; }    // PVP Challenges
+        public static HtmlTextWriter flashSales { get; private set; }       // Flash Sales (featured market stuff)
+        public static HtmlTextWriter nodeOverrides { get; private set; }    // Node overrides (excluding destroyed relays)
+        private int indentLvl = 3;  // indent level relative to everything else on Default.aspx
 
         void Application_Start(object sender, EventArgs e)
         {
@@ -48,6 +49,7 @@ namespace WorldStateWeb
 
                         Thread.Sleep(60000);    // refresh wsdata on a 1-minute interval
                         // possible issue of trying to request page during the x milliseconds wsdata is being refreshed
+                        // solved by using a copy and assigning to it?
                     }
                 });
             t.Start();
@@ -55,17 +57,17 @@ namespace WorldStateWeb
 
         void createHtml()
         {
-            alerts.Clear();
-            sorties.Clear();
-            invasions.Clear();
-            fissures.Clear();
-            voidTraders.Clear();
-            invEventStat.Clear();
-            events.Clear();
-            darvoDeal.Clear();
-            pvpChallenges.Clear();
-            flashSales.Clear();
-            nodeOverrides.Clear();
+            alerts = new HtmlTextWriter(new System.IO.StringWriter());  // why does HtmlTextWriter.Flush() not clear out the data...
+            sorties = new HtmlTextWriter(new System.IO.StringWriter());
+            invasions = new HtmlTextWriter(new System.IO.StringWriter());
+            fissures = new HtmlTextWriter(new System.IO.StringWriter());
+            voidTraders = new HtmlTextWriter(new System.IO.StringWriter());
+            invEventStat = new HtmlTextWriter(new System.IO.StringWriter());
+            events = new HtmlTextWriter(new System.IO.StringWriter());
+            darvoDeal = new HtmlTextWriter(new System.IO.StringWriter());
+            pvpChallenges = new HtmlTextWriter(new System.IO.StringWriter());
+            flashSales = new HtmlTextWriter(new System.IO.StringWriter());
+            nodeOverrides = new HtmlTextWriter(new System.IO.StringWriter());
 
             // todo trycatch stuff
             createAlerts();
@@ -76,76 +78,110 @@ namespace WorldStateWeb
             createInvEventStats();
             createEvents();
             createDarvoDeals();
-            //createPvpChallenges();
-            //createFlashSales();
-            //createNodeOverrides();
+            createPvpChallenges();
+            createFlashSales();
+            createNodeOverrides();
         }
 
         void createAlerts()
         {
+            alerts.Indent = indentLvl;
             foreach (WarframeWorldStateTest.Alert alert in wsdata.alerts)
             {
-                //alerts.AppendLine("<li>");
-                alerts.AppendLine("<tr>");
-                alerts.AppendLine("<td>");
-                //alerts.Append(alert.ToString());
-                alerts.Append(alert.missionInfo.location/* + " | "*/ + "</td>");
-                alerts.AppendLine("<td>");
-                alerts.Append(alert.missionInfo.missionType);
-                alerts.Append(" (" + alert.missionInfo.faction + " lvl " + alert.missionInfo.minEnemyLevel + "-" + alert.missionInfo.maxEnemyLevel/* + ") | "*/ + ") </td>");
+                alerts.RenderBeginTag("tr");
+
+                alerts.RenderBeginTag("td");
+                alerts.Write(alert.missionInfo.location);
+                alerts.RenderEndTag();
+                alerts.WriteLine();
+
+                alerts.RenderBeginTag("td");
+                alerts.Write(alert.missionInfo.missionType);
+                alerts.Write(" (" + alert.missionInfo.faction + " lvl " + alert.missionInfo.minEnemyLevel + "-" + alert.missionInfo.maxEnemyLevel + ")");
+                alerts.RenderEndTag();
+                alerts.WriteLine();
+
                 TimeSpan tte = alert.expiryDate - DateTime.UtcNow;
-                alerts.Append("<td>");
-                alerts.Append((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
-                //alerts.AppendLine("</li>");
-                alerts.AppendLine("</td>");
-                alerts.Append("<td>");
-                alerts.Append(alert.missionInfo.missionReward.credits + " credits"/* + " | "*/ + "</td>");
-                alerts.Append("<td>");
+                alerts.RenderBeginTag("td");
+                alerts.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                alerts.RenderEndTag();
+                alerts.WriteLine();
+
+                alerts.RenderBeginTag("td");
+                alerts.Write(alert.missionInfo.missionReward.credits + " credits");
+                alerts.RenderEndTag();
+                alerts.WriteLine();
+
+                alerts.RenderBeginTag("td");
                 foreach (Tuple<string, int> t in alert.missionInfo.missionReward.countedItems)
                 {
-                    alerts.Append(t.Item2 + " " + t.Item1 + " ");
+                    alerts.Write(t.Item2 + " " + t.Item1 + " ");
                 }
                 foreach(string s in alert.missionInfo.missionReward.items)
                 {
-                    alerts.Append(s);
+                    alerts.Write(s);
                 }
-                alerts.Append("</td>");
-                alerts.AppendLine("</tr>");
+                alerts.RenderEndTag();
+
+                alerts.RenderEndTag();
             }
         }
 
         void createSorties()
         {
+            sorties.Indent = indentLvl;
             Sorties s;
-            sorties.Append("<th colspan=\"4\">");
+            sorties.RenderBeginTag("tr");
+            sorties.AddAttribute(HtmlTextWriterAttribute.Colspan, "4");
+            sorties.RenderBeginTag("th");
             if (wsdata.sorties != null && wsdata.sorties[0] != null) 
             { 
-                sorties.Append(wsdata.sorties[0].boss);
-                sorties.Append("  ");
+                sorties.Write(wsdata.sorties[0].boss);
+                sorties.Write("  ");
                 s = wsdata.sorties[0];
                 TimeSpan tte = s.expiry - DateTime.UtcNow;
-                sorties.Append((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                sorties.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                sorties.RenderEndTag();
+                sorties.RenderEndTag();
             } 
             else 
-            { 
-                sorties.AppendLine("N/A</th>");
+            {
+                sorties.Write("N/A");
+                sorties.RenderEndTag();
+                sorties.RenderEndTag();
                 return;
             }
-            sorties.AppendLine("</th>");
 
             foreach(Variants v in s.variants)
             {
-                sorties.Append("<tr>");
-                sorties.Append("<td>" + v.node + "</td>");
-                sorties.Append("<td>" + v.missionType + "</td>");
-                sorties.Append("<td>" + v.modifierType + "</td>");
-                sorties.Append("<td>" + v.tileset + "</td>");
-                sorties.AppendLine("</tr>");
+                sorties.RenderBeginTag("tr");
+
+                sorties.RenderBeginTag("td");
+                sorties.Write(v.node);
+                sorties.RenderEndTag();
+                sorties.WriteLine();
+
+                sorties.RenderBeginTag("td");
+                sorties.Write(v.missionType);
+                sorties.RenderEndTag();
+                sorties.WriteLine();
+
+                sorties.RenderBeginTag("td");
+                sorties.Write(v.modifierType);
+                sorties.RenderEndTag();
+                sorties.WriteLine();
+
+                sorties.RenderBeginTag("td");
+                sorties.Write(v.tileset);
+                sorties.RenderEndTag();
+
+                sorties.RenderEndTag();
             }
         }
 
         void createInvasions()
         {
+            invasions.Indent = indentLvl;
             foreach (WarframeWorldStateTest.Invasion invasion in Global.wsdata.invasions)
             {
                 if (!invasion.completed)
@@ -153,120 +189,198 @@ namespace WorldStateWeb
                     // AttackerMissionInfo faction is defender faction and vice versa
                     string attacker = invasion.defenderMissionInfo.Item2;
                     string defender = invasion.attackerMissionInfo.Item2;
-                    invasions.Append("<tr>");
-                    invasions.Append("<td>" + invasion.node + "</td>");
-                    invasions.Append("<td>" + invasion.faction + " invasion</td>");
+                    invasions.RenderBeginTag("tr");
+
+                    invasions.RenderBeginTag("td");
+                    invasions.Write(invasion.node);
+                    invasions.RenderEndTag();
+                    invasions.WriteLine();
+
+                    invasions.RenderBeginTag("td");
+                    invasions.Write(invasion.faction);
+                    invasions.RenderEndTag();
+                    invasions.WriteLine();
+
                     double percentComplete = ((double)invasion.count / (double)invasion.goal);
-                    invasions.Append("<td>" + Math.Floor(Math.Abs(percentComplete * 100.0)) + "%");
-                    if (percentComplete > 0) { invasions.Append(" (Advantage: " + attacker + ")"); }
-                    else if (percentComplete < 0) { invasions.Append(" (Advantage: " + defender + ")"); }
-                    else { invasions.Append(" (Tie)"); }
-                    invasions.Append("</td>");
+                    invasions.RenderBeginTag("td");
+                    invasions.Write(Math.Floor(Math.Abs(percentComplete * 100.0)) + "%");
+                    if (percentComplete > 0) { invasions.Write(" (Advantage: " + attacker + ")"); }
+                    else if (percentComplete < 0) { invasions.Write(" (Advantage: " + defender + ")"); }
+                    else { invasions.Write(" (Tie)"); }
+                    invasions.RenderEndTag();
+                    invasions.WriteLine();
+
+                    invasions.RenderBeginTag("td");
+                    invasions.Write(defender + " rewards: " + invasion.defenderReward.First().Item2 + " " + invasion.defenderReward.First().Item1);
+                    invasions.RenderEndTag();
                     // Infested invasions don't have an attackerReward entry in the worldState so need to check for that
-                    invasions.Append("<td>" + defender + " rewards: " + invasion.defenderReward.First().Item2 + " " + invasion.defenderReward.First().Item1 + "</td>");
-                    if (invasion.attackerReward.Count > 0) { invasions.Append("<td>" + attacker + " rewards: " + invasion.attackerReward.First().Item2 + " " + invasion.attackerReward.First().Item1 + "</td>"); }
-                    invasions.AppendLine("</tr>");
+                    if (invasion.attackerReward.Count > 0)
+                    {
+                        invasions.WriteLine();
+                        invasions.RenderBeginTag("td");
+                        invasions.Write(attacker + " rewards" + invasion.attackerReward.First().Item2 + " " + invasion.attackerReward.First().Item1);
+                        invasions.RenderEndTag();
+                    }
+                    invasions.RenderEndTag();
                 }
-                //invasions.AppendLine("<li>" + invasion.ToString() + "</li>");
             }
         }
 
         void createFissures()
         {
-            //fissures.AppendLine("<ul>");
-            //foreach (WarframeWorldStateTest.FissureMission fissure in Global.wsdata.fissureMissions)
-            //{
-            //    fissures.AppendLine("<li>");
-            //    //fissures.Append(fissure.ToString());
-            //    fissures.Append(fissure.modifier + " | ");
-            //    fissures.Append(fissure.nodeName + " | ");
-            //    fissures.Append(fissure.nodeType + " (" + fissure.nodeEnemy + ") | ");
-            //    TimeSpan tte = fissure.expiry - DateTime.UtcNow;
-            //    fissures.Append((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
-            //    fissures.AppendLine("</li>");
-            //}
-            //fissures.AppendLine("</ul>");
+            fissures.Indent = indentLvl;
             foreach (FissureMission fissure in wsdata.fissureMissions)
             {
-                fissures.AppendLine("<tr>");
-                fissures.Append("<td>" + fissure.modifier + "</td>");
-                fissures.Append("<td>" + fissure.nodeName + "</td>");
-                fissures.Append("<td>" + fissure.nodeType + " (" + fissure.nodeEnemy + ")</td>");
+                fissures.RenderBeginTag("tr");
+
+                fissures.RenderBeginTag("td");
+                fissures.Write(fissure.modifier);
+                fissures.RenderEndTag();
+                fissures.WriteLine();
+
+                fissures.RenderBeginTag("td");
+                fissures.Write(fissure.nodeName);
+                fissures.RenderEndTag();
+                fissures.WriteLine();
+
+                fissures.RenderBeginTag("td");
+                fissures.Write(fissure.nodeType + " (" + fissure.nodeEnemy + ")");
+                fissures.RenderEndTag();
+                fissures.WriteLine();
+
                 TimeSpan tte = fissure.expiry - DateTime.UtcNow;
-                fissures.Append("<td>" + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left") + "</td>");
-                fissures.AppendLine("</tr>");
+                fissures.RenderBeginTag("td");
+                fissures.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                fissures.RenderEndTag();
+
+                fissures.RenderEndTag();
             }
         }
 
         void createVoidTraders()
         {
+            voidTraders.Indent = indentLvl;
+            //voidTraders.Write("<tr><th colspan=\"3\">");
+            voidTraders.RenderBeginTag("tr");
+            voidTraders.AddAttribute(HtmlTextWriterAttribute.Colspan, "3");
+            voidTraders.RenderBeginTag("th");
+            if (wsdata.voidTraders == null || wsdata.voidTraders.Count < 1)  // No void trader for some reason
+            {
+                voidTraders.Write("N/A");
+                voidTraders.RenderEndTag();
+                voidTraders.RenderEndTag();
+                return;
+            }
             VoidTrader v = wsdata.voidTraders.First();
-            voidTraders.Append("<tr><th colspan=\"3\">");
             // if active, show location, departure time and list his stuff
             if (v.activation <= DateTime.UtcNow && v.expiry >= DateTime.UtcNow)
             {
-                voidTraders.Append("Active at ");
-                voidTraders.Append(v.node);
-                voidTraders.Append(" for ");
+                voidTraders.Write("Active at ");
+                voidTraders.Write(v.node);
+                voidTraders.Write(" for ");
                 TimeSpan tte = v.expiry - DateTime.UtcNow;
-                voidTraders.Append((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
+                voidTraders.Write((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
                     + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "")
                     + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
-                voidTraders.Append("</th></tr>");
+                //voidTraders.Write("</th></tr>");
+                voidTraders.RenderEndTag();
+                voidTraders.RenderEndTag();
                 foreach(Tuple<string, int, int> t in v.manifest)
                 {
-                    voidTraders.Append("<tr>");
-                    voidTraders.Append("<td>" + t.Item1 + "</td>");
-                    voidTraders.Append("<td>" + t.Item2 + " ducats</td>");
-                    voidTraders.Append("<td>" + t.Item3 + " credits</td>");
-                    voidTraders.Append("</tr>");
+                    //voidTraders.Write("<tr>");
+                    voidTraders.RenderBeginTag("tr");
+                    //voidTraders.Write("<td>" + t.Item1 + "</td>");
+                    voidTraders.RenderBeginTag("td");
+                    voidTraders.Write(t.Item1);
+                    voidTraders.RenderEndTag();
+                    voidTraders.WriteLine();
+                    //voidTraders.Write("<td>" + t.Item2 + " ducats</td>");
+                    voidTraders.RenderBeginTag("td");
+                    voidTraders.Write(t.Item2 + " ducats");
+                    voidTraders.RenderEndTag();
+                    voidTraders.WriteLine();
+                    //voidTraders.Write("<td>" + t.Item3 + " credits</td>");
+                    voidTraders.RenderBeginTag("td");
+                    voidTraders.Write(t.Item3 + " credits");
+                    voidTraders.RenderEndTag();
+                    //voidTraders.Write("</tr>");
                 }
             }
             // if inactive, say as much and show location, arrival time
             else
             {
-                voidTraders.Append("Arriving at ");
-                voidTraders.Append(v.node);
-                voidTraders.Append(" in ");
+                voidTraders.Write("Arriving at ");
+                voidTraders.Write(v.node);
+                voidTraders.Write(" in ");
                 TimeSpan tte = v.activation - DateTime.UtcNow;
-                voidTraders.Append((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
+                voidTraders.Write((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
                     + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") 
                     + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
-                voidTraders.Append("</th></tr>");
+                voidTraders.RenderEndTag();
+                voidTraders.RenderEndTag();
             }
         }
 
         void createInvEventStats()
         {
+            invEventStat.Indent = indentLvl;
             // [0] is for Fomorian, [1] is for Razorback
             string grinPct = wsdata.projectPct[0].ToString("N1") + "%";
             string grinRemain = (100.0 - wsdata.projectPct[0]).ToString("N1") + "%";
             string corpPct = wsdata.projectPct[1].ToString("N1") + "%";
             string corpRemain = (100.0 - wsdata.projectPct[1]).ToString("N1") + "%";
-            invEventStat.Append("<div style=\"height: 80px\">");
-            invEventStat.Append("<span>Fomorian</span></br>");
-            invEventStat.Append(grinPct);
-            invEventStat.Append("<div class=\"percent-bar\">");
-            invEventStat.Append("<div class=\"progress-percent progress-done grineer\" style=\"width: " + grinPct + "\"></div>");
-            invEventStat.Append("<div class=\"progress-percent progress-remaining\" style=\"width: " + grinRemain + "\"></div>");
-            invEventStat.Append("</div>");
-            invEventStat.Append("</div>");
 
-            invEventStat.Append("<div style=\"height: 80px\">");
-            invEventStat.Append("<span>Razorback Armada</span></br>");
-            invEventStat.Append(corpPct);
-            invEventStat.Append("<div class=\"percent-bar\">");
-            invEventStat.Append("<div class=\"progress-percent progress-done corpus\" style=\"width: " + corpPct + "\"></div>");
-            invEventStat.Append("<div class=\"progress-percent progress-remaining\" style=\"width: " + corpRemain + "\"></div>");
-            invEventStat.Append("</div>");
-            invEventStat.Append("</div>");
+            invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Height, "80px");
+            invEventStat.RenderBeginTag("div");
+            invEventStat.Write("Fomorian");
+            invEventStat.WriteFullBeginTag("br");
+            invEventStat.Write(grinPct);
+            invEventStat.WriteLine();
+            
+            invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "percent-bar");
+            invEventStat.RenderBeginTag("div");
+            
+            invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "progress-percent progress-done grineer");
+            invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Width, grinPct);
+            invEventStat.RenderBeginTag("div");
+            invEventStat.RenderEndTag();
+            
+            invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "progress-percent progress-remaining");
+            invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Width, grinRemain);
+            invEventStat.RenderBeginTag("div");
+            invEventStat.RenderEndTag();
+            invEventStat.RenderEndTag();
+            invEventStat.RenderEndTag();
+
+            invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Height, "80px");
+            invEventStat.RenderBeginTag("div");
+            invEventStat.Write("Razorback Armada");
+            invEventStat.WriteFullBeginTag("br");
+            invEventStat.Write(corpPct);
+            
+            invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "percent-bar");
+            invEventStat.RenderBeginTag("div");
+            
+            invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "progress-percent progress-done corpus");
+            invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Width, corpPct);
+            invEventStat.RenderBeginTag("div");
+            invEventStat.RenderEndTag();
+            
+            invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "progress-percent progress-remaining");
+            invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Width, corpRemain);
+            invEventStat.RenderBeginTag("div");
+            invEventStat.RenderEndTag();
+            invEventStat.RenderEndTag();
+            invEventStat.RenderEndTag();
         }
 
         void createEvents()
         {
+            events.Indent = indentLvl;
             foreach (Event e in wsdata.events)
             {
-                events.Append("<div class=\"newsbox\">");
+                events.AddAttribute(HtmlTextWriterAttribute.Class, "newsbox");
+                events.RenderBeginTag("div");
                 TimeSpan timeUp = DateTime.UtcNow - e.date;
                 string message = "";
                 foreach (var m in e.messages)
@@ -276,15 +390,40 @@ namespace WorldStateWeb
                         message = m.Value;
                     }
                 }
-                events.Append("<span>(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + message + "</span></br>");
-                events.Append("<a href=" + e.prop + ">" + e.prop + "</a>");
-                events.Append("</div>");
+                events.RenderBeginTag("span");
+                events.Write("(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + message);
+                events.RenderEndTag();
+                events.WriteFullBeginTag("br");
+                events.AddAttribute(HtmlTextWriterAttribute.Href, e.prop);
+                events.RenderBeginTag("a");
+                events.Write(e.prop);
+                events.RenderEndTag();
+                events.RenderEndTag();
             }
         }
 
         void createDarvoDeals()
         {
-            darvoDeal.Append("<div id=\"todo\"></div>");
+            darvoDeal.Indent = indentLvl;
+            darvoDeal.Write("<span>todo</span>");
+        }
+
+        void createPvpChallenges()
+        {
+            pvpChallenges.Indent = indentLvl;
+            pvpChallenges.Write("<span>todo</span>");
+        }
+
+        void createFlashSales()
+        {
+            flashSales.Indent = indentLvl;
+            flashSales.Write("<span>todo</span>");
+        }
+
+        void createNodeOverrides()
+        {
+            nodeOverrides.Indent = indentLvl;
+            nodeOverrides.Write("<span>todo</span>");
         }
 
         void Application_End(object sender, EventArgs e)
