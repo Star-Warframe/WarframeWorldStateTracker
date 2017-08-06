@@ -311,10 +311,15 @@ namespace WarframeWorldStateTest
             Stopwatch st = Stopwatch.StartNew();
 #endif
             getWorldState();
+#if DEBUG
+            st.Stop();
+            Console.Write("Retrieved WorldState in " + String.Format("{0,5}", st.ElapsedMilliseconds) + "ms | ");
+            st.Restart();
+#endif
             parseWorldState();
 #if DEBUG
             st.Stop();
-            Console.WriteLine("Retrieved and parsed WorldState in " + st.ElapsedMilliseconds + "ms");
+            Console.WriteLine("Parsed WorldState in " + String.Format("{0,5}", st.ElapsedMilliseconds) + "ms");
 #endif
         }
 
@@ -350,16 +355,8 @@ namespace WarframeWorldStateTest
 
         public void refreshWorldState()
         {
-#if DEBUG
-            Stopwatch st = Stopwatch.StartNew();
-#endif
             clearAll();
-            getWorldState();
-            parseWorldState();
-#if DEBUG
-            st.Stop();
-            Console.WriteLine("Refreshed WorldState in " + st.ElapsedMilliseconds + "ms");
-#endif
+            setup();
         }
 
         private void parseWorldState()
