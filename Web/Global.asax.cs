@@ -103,7 +103,7 @@ namespace WorldStateWeb
 
                 TimeSpan tte = alert.expiryDate - DateTime.UtcNow;
                 alerts.RenderBeginTag("td");
-                alerts.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                alerts.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + (tte.Minutes > 0 ? tte.Minutes + (tte.Minutes != 1 ? " minutes, " : " minute, ") : "") + tte.Seconds + (tte.Seconds != 1 ? " seconds left" : " second left"));
                 alerts.RenderEndTag();
                 alerts.WriteLine();
 
@@ -218,7 +218,7 @@ namespace WorldStateWeb
                     {
                         invasions.WriteLine();
                         invasions.RenderBeginTag("td");
-                        invasions.Write(attacker + " rewards" + invasion.attackerReward.First().Item2 + " " + invasion.attackerReward.First().Item1);
+                        invasions.Write(attacker + " rewards: " + invasion.attackerReward.First().Item2 + " " + invasion.attackerReward.First().Item1);
                         invasions.RenderEndTag();
                     }
                     invasions.RenderEndTag();
@@ -250,7 +250,7 @@ namespace WorldStateWeb
 
                 TimeSpan tte = fissure.expiry - DateTime.UtcNow;
                 fissures.RenderBeginTag("td");
-                fissures.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes left" : " minute left"));
+                fissures.Write((tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + (tte.Minutes > 0 ? tte.Minutes + (tte.Minutes != 1 ? " minutes, " : " minute, ") : "") + tte.Seconds + (tte.Seconds != 1 ? " seconds left" : " second left"));
                 fissures.RenderEndTag();
 
                 fissures.RenderEndTag();
@@ -332,9 +332,12 @@ namespace WorldStateWeb
 
             invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Height, "80px");
             invEventStat.RenderBeginTag("div");
+            invEventStat.RenderBeginTag("p");
             invEventStat.Write("Fomorian");
-            invEventStat.WriteFullBeginTag("br");
+            invEventStat.RenderEndTag();
+            invEventStat.RenderBeginTag("p");
             invEventStat.Write(grinPct);
+            invEventStat.RenderEndTag();
             invEventStat.WriteLine();
             
             invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "percent-bar");
@@ -354,8 +357,9 @@ namespace WorldStateWeb
 
             invEventStat.AddStyleAttribute(HtmlTextWriterStyle.Height, "80px");
             invEventStat.RenderBeginTag("div");
+            invEventStat.RenderBeginTag("p");
             invEventStat.Write("Razorback Armada");
-            invEventStat.WriteFullBeginTag("br");
+            invEventStat.RenderEndTag();
             invEventStat.Write(corpPct);
             
             invEventStat.AddAttribute(HtmlTextWriterAttribute.Class, "percent-bar");
@@ -390,10 +394,9 @@ namespace WorldStateWeb
                         message = m.Value;
                     }
                 }
-                events.RenderBeginTag("span");
+                events.RenderBeginTag("p");
                 events.Write("(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + message);
                 events.RenderEndTag();
-                events.WriteFullBeginTag("br");
                 events.AddAttribute(HtmlTextWriterAttribute.Href, e.prop);
                 events.RenderBeginTag("a");
                 events.Write(e.prop);
@@ -405,25 +408,185 @@ namespace WorldStateWeb
         void createDarvoDeals()
         {
             darvoDeal.Indent = indentLvl;
-            darvoDeal.Write("<span>todo</span>");
+            if (wsdata.dailyDeals.Count < 1)    // I don't *think* this should ever be empty, but check just in case
+            {
+                darvoDeal.Write("No active deal");
+                return;
+            }
+            DailyDeal d = wsdata.dailyDeals.First();    // Should also only be one item in the list
+            darvoDeal.RenderBeginTag("h3");
+            darvoDeal.Write(d.storeItem);
+            darvoDeal.RenderEndTag();
+            darvoDeal.RenderBeginTag("p");
+            darvoDeal.RenderBeginTag("strike");
+            darvoDeal.Write(d.originalPrice + " platinum");
+            darvoDeal.RenderEndTag();
+            darvoDeal.Write(" | " + d.salePrice + " platinum ");
+            darvoDeal.Write("(" + d.discount + "% off)");
+            darvoDeal.RenderEndTag();
+            darvoDeal.RenderBeginTag("p");
+            darvoDeal.Write((d.amountTotal - d.amountSold) + " / " + d.amountTotal + " left");
+            darvoDeal.RenderEndTag();
+            TimeSpan tte = d.expiry - DateTime.UtcNow;
+            darvoDeal.Write("Sale ends in " + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
         }
 
         void createPvpChallenges()
         {
             pvpChallenges.Indent = indentLvl;
-            pvpChallenges.Write("<span>todo</span>");
+            // might as well just query the list 5 times instead of sorting since the pvp challenge list has a fixed, small number of items ...also because lazy
+            pvpChallenges.AddAttribute(HtmlTextWriterAttribute.Class, "pvp-list");
+            pvpChallenges.RenderBeginTag("ul");
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.RenderBeginTag("h3");
+            pvpChallenges.Write("Weekly challenge set (");
+            PVPChallengeInstance p1 = (from pvp in wsdata.pvpChallengeInstances where pvp.category == "Weekly" select pvp).First();
+            TimeSpan tte = p1.endDate - DateTime.UtcNow;
+            pvpChallenges.Write("Expires in " + (tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "") + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+            pvpChallenges.Write(")");
+            pvpChallenges.RenderEndTag();//h3
+            pvpChallenges.RenderBeginTag("ul");
+            foreach (PVPChallengeInstance p in (from pvp in wsdata.pvpChallengeInstances where pvp.category == "Weekly" select pvp)) // Weeklies
+            {
+                pvpChallenges.RenderBeginTag("li");
+                pvpChallenges.Write(p.challengeTypeRefId);
+                pvpChallenges.RenderEndTag();//li
+                //pvpChallenges.WriteFullBeginTag("br");
+            }
+            pvpChallenges.RenderEndTag();//ul
+            pvpChallenges.RenderEndTag();//li
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.RenderBeginTag("h3");
+            pvpChallenges.Write("Daily challenge set (");
+            p1 = (from pvp in wsdata.pvpChallengeInstances where pvp.category == "Daily" select pvp).First();
+            tte = p1.endDate - DateTime.UtcNow;
+            pvpChallenges.Write("Expires in " + (tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "") + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+            pvpChallenges.Write(")");
+            pvpChallenges.RenderEndTag();//h3
+
+            pvpChallenges.RenderBeginTag("ul");
+
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.RenderBeginTag("strong");
+            pvpChallenges.Write("Annihilation");
+            pvpChallenges.RenderEndTag();
+            pvpChallenges.RenderBeginTag("ul");
+            foreach (PVPChallengeInstance p in (from pvp in wsdata.pvpChallengeInstances where (pvp.pvpMode == "Annihilation" && pvp.category != "Modified round") select pvp)) // Annihilation
+            {
+                writePvpDaily(p);
+            }
+            pvpChallenges.RenderEndTag();//ul
+            pvpChallenges.RenderEndTag();//li
+
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.RenderBeginTag("strong");
+            pvpChallenges.Write("Team Annihilation");
+            pvpChallenges.RenderEndTag();
+            pvpChallenges.RenderBeginTag("ul");
+            foreach (PVPChallengeInstance p in (from pvp in wsdata.pvpChallengeInstances where (pvp.pvpMode == "Team Annihilation" && pvp.category != "Modified round") select pvp))   // Team Annihilation
+            {
+                writePvpDaily(p);
+            }
+            pvpChallenges.RenderEndTag();//ul
+            pvpChallenges.RenderEndTag();//li
+
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.RenderBeginTag("strong");
+            pvpChallenges.Write("Capture the Cephalon");
+            pvpChallenges.RenderEndTag();
+            pvpChallenges.RenderBeginTag("ul");
+            foreach (PVPChallengeInstance p in (from pvp in wsdata.pvpChallengeInstances where (pvp.pvpMode == "Capture the Cephalon" && pvp.category != "Modified round") select pvp))   // Capture the Cephalon
+            {
+                writePvpDaily(p);
+            }
+            pvpChallenges.RenderEndTag();//ul
+            pvpChallenges.RenderEndTag();//li
+
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.RenderBeginTag("strong");
+            pvpChallenges.Write("Lunaro");
+            pvpChallenges.RenderEndTag();
+            pvpChallenges.RenderBeginTag("ul");
+            foreach (PVPChallengeInstance p in (from pvp in wsdata.pvpChallengeInstances where (pvp.pvpMode == "Lunaro" && pvp.category != "Modified round") select pvp)) // Lunaro
+            {
+                writePvpDaily(p);
+            }
+            pvpChallenges.RenderEndTag();//ul
+            pvpChallenges.RenderEndTag();//li
+
+            pvpChallenges.RenderEndTag();//li
+            pvpChallenges.RenderEndTag();//ul
+        }
+
+        void writePvpDaily(PVPChallengeInstance p)  // helper function to get rid of code repetition
+        {
+            pvpChallenges.RenderBeginTag("li");
+            pvpChallenges.Write(p.challengeTypeRefId);
+            pvpChallenges.RenderEndTag();
+            //pvpChallenges.WriteFullBeginTag("br");
         }
 
         void createFlashSales()
         {
             flashSales.Indent = indentLvl;
-            flashSales.Write("<span>todo</span>");
+            foreach (FlashSale f in wsdata.flashSales)
+            {
+                flashSales.RenderBeginTag("tr");
+
+                flashSales.RenderBeginTag("td");
+                flashSales.Write(f.typeName);
+                flashSales.RenderEndTag();
+
+                flashSales.RenderBeginTag("td");
+                flashSales.Write(f.premiumOverride + " platinum");
+                flashSales.RenderEndTag();
+
+                flashSales.RenderBeginTag("td");
+                if (f.featured) { flashSales.Write("Featured item"); }
+                else if (f.popular) { flashSales.Write("Popular item"); }
+                flashSales.RenderEndTag();
+
+                flashSales.RenderEndTag();
+            }
         }
 
         void createNodeOverrides()
         {
             nodeOverrides.Indent = indentLvl;
-            nodeOverrides.Write("<span>todo</span>");
+            bool anyExist = false;
+            foreach (NodeOverride nodeOverride in wsdata.nodeOverrides)
+            {
+                if (nodeOverride.hide) { continue; }    // we don't care about hidden nodes since those are just destroyed relays
+                else
+                {
+                    anyExist = true;
+                    nodeOverrides.RenderBeginTag("tr");
+
+                    nodeOverrides.RenderBeginTag("td");
+                    nodeOverrides.Write(nodeOverride.node);
+                    nodeOverrides.RenderEndTag();
+
+                    nodeOverrides.RenderBeginTag("td");
+                    nodeOverrides.Write(nodeOverride.missionType);
+                    nodeOverrides.RenderEndTag();
+
+                    TimeSpan tte = nodeOverride.expiry - DateTime.UtcNow;
+                    nodeOverrides.RenderBeginTag("td");
+                    nodeOverrides.Write(nodeOverride.faction + " occupying for ");
+                    nodeOverrides.Write((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "") + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "") + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+                    nodeOverrides.RenderEndTag();
+
+                    nodeOverrides.RenderEndTag();
+                }
+            }
+            if (!anyExist)
+            {
+                nodeOverrides.RenderBeginTag("tr");
+                nodeOverrides.RenderBeginTag("th");
+                nodeOverrides.Write("No current node overrides");
+                nodeOverrides.RenderEndTag();
+                nodeOverrides.RenderEndTag();
+            }
         }
 
         void Application_End(object sender, EventArgs e)

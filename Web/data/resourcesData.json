@@ -179,6 +179,7 @@
 	"/Lotus/Types/Recipes/Components/FormaBlueprint" : "Forma Blueprint",
 	"/Lotus/Types/Recipes/Components/OrokinCatalystBlueprint" : "Orokin Catalyst Blueprint",
 	"/Lotus/Types/Recipes/Components/OrokinReactorBlueprint" : "Orokin Ractor Blueprint",
+	"/Lotus/Types/Recipes/Components/UtilityUnlockerBlueprint" : "Exilus Adapter Blueprint",
 	"/Lotus/Types/Recipes/Weapons/DeraVandalBlueprint" : "Dera Vandal Blueprint",
 	"/Lotus/Types/Recipes/Weapons/GrineerCombatKnifeSortieBlueprint" : "Sheev Blueprint",
 	"/Lotus/Types/Recipes/Weapons/KarakWraithBlueprint" : "Karak Wraith Blueprint",

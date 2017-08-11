@@ -7,7 +7,7 @@
 body {
     background-color: #fff;
     /*border-top: solid 10px #000;*/
-    color: #333;
+    color: #000;
     font-size: .85em;
     font-family: /*"Segoe UI"*/Helvetica, Verdana, Tahoma, Sans-Serif;
     margin: 0;
@@ -61,13 +61,12 @@ mark {
 h1, h2, h3,
 h4, h5, h6 {
     color: #000;
-    margin-bottom: 0;
     padding-bottom: 0;
+    margin: 0;
 }
 
 h1 {
     font-size: 2em;
-    margin: 0;
 }
 
 h2 {
@@ -75,7 +74,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.2em
+    font-size: 1.2em;
 }
 
 h4 {
@@ -86,13 +85,18 @@ h5, h6 {
     font-size: 1em;
 }
 
-    h5 a:link, h5 a:visited, h5 a:active {
-        padding: 0;
-        text-decoration: none;
-    }
+h5 a:link, h5 a:visited, h5 a:active {
+    padding: 0;
+    text-decoration: none;
+}
+
 
 /* site-specific items
 ----------------------------------------------------------*/
+p {
+    margin: 0;
+}
+
 .content-element {
     /*For if I ever want to replace the "div.main-content-container > div" markup*/
 }
@@ -137,6 +141,27 @@ h5, h6 {
 
 div.main-content-container > div {
     margin-bottom: 20px;
+}
+
+div.inner-content {
+    margin: 0.5em;
+}
+
+img.font-height {
+    height: 1em;
+}
+
+div#pvpChallenges ul {
+    padding-left: 10px;
+    margin: 0;
+}
+
+div#pvpChallenges ul ul {
+    padding-left: 40px;
+}
+
+ul.pvp-list > li:first-child {
+    margin-bottom: 10px;
 }
 
 /* main layout

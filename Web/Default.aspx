@@ -24,7 +24,7 @@
     </div>
     <div id="invEventStat" class="content-element">
         <h1>Invasion Event Progress</h1>
-        <div>
+        <div class="inner-content">
             <%= invEventStat.InnerWriter.ToString() %>
         </div>
     </div>
@@ -41,34 +41,34 @@
         </table>
     </div>
     <div id="events" class="content-element">
-        <h1>Events (News)</h1>
-        <div>
+        <h1>News</h1>
+        <div class="inner-content">
             <%= events.InnerWriter.ToString() %>
         </div>
     </div>
     <div id="darvoDeal" class="content-element">
         <h1>Daily Darvo Deal</h1>
-        <div>
+        <div class="inner-content">
             <%= darvoDeal.InnerWriter.ToString() %>
         </div>
     </div>
     <div id="pvpChallenges" class="content-element">
         <h1>PVP Challenges</h1>
-        <div>
+        <div class="inner-content">
             <%= pvpChallenges.InnerWriter.ToString() %>
         </div>
     </div>
     <div id="flashSales" class="content-element">
         <h1>Market Items and Flash Sales</h1>
-        <div>
+        <table>
             <%= flashSales.InnerWriter.ToString() %>
-        </div>
+        </table>
     </div>
     <div id="nodeOverrides" class="content-element">
         <h1>Node Overrides</h1>
-        <div>
+        <table>
             <%= nodeOverrides.InnerWriter.ToString() %>
-        </div>
+        </table>
     </div>
     </div>
 
