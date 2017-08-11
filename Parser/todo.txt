@@ -11,6 +11,7 @@
     -- Looks like I'll probably need to use JS for dynamically adding new things as they come up in the worldState
   -- Add lock of some sort to wsdata in Global.asax to make access thread safe (or to ensure blank/bad data isn't loaded if a refresh happens while wsdata and other things are being rebuilt)
   -- Get rid of contact page maybe
+  -- Find/make decent Corpus/Infested icons
 
 -- Keep an eye on the worldstate php, new object called "ConstructionProjects"
 

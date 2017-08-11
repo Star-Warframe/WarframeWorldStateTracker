@@ -118,6 +118,7 @@
     <Compile Include="VoidTrader.cs" />
     <Compile Include="WorldStateData.cs" />
     <Compile Include="WorldStateObject.cs" />
+    <Content Include="mappers\regExpSetSolNodes.txt" />
     <Content Include="todo.txt" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

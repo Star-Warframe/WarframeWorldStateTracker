@@ -50,7 +50,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_node);
+                return MapSolNode.getNodeValue(m_node);
             }
         }
         private List<Tuple<string, int, int>> m_manifest = new List<Tuple<string, int, int>>();

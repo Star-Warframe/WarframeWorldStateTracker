@@ -55,7 +55,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_node);
+                return MapSolNode.getNodeValue(m_node);
                 //return m_node;
             }
         }
@@ -121,7 +121,7 @@ namespace WarframeWorldStateTest
             StringBuilder str = new StringBuilder();
 
             str.AppendLine(MapFissure.getModifier(m_modifier));
-            str.AppendLine(MapSolNode.getNodeName(m_node));
+            str.AppendLine(MapSolNode.getNodeValue(m_node));
             str.AppendLine(MapSolNode.getNodeType(m_node) + " (" + MapSolNode.getNodeEnemy(m_node) + ")");
             str.AppendLine("Starts: " + m_activation.ToLocalTime().ToString("hh:mm tt"));
             TimeSpan tte = m_expiry - DateTime.UtcNow;

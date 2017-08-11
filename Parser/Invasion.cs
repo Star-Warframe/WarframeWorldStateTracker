@@ -38,7 +38,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_node);
+                return MapSolNode.getNodeValue(m_node);
             }
         }
         private int m_count = 0;
@@ -192,7 +192,7 @@ namespace WarframeWorldStateTest
             string attacker = MapFaction.getFaction(m_defenderMissionInfo.Item2);
             string defender = MapFaction.getFaction(m_attackerMissionInfo.Item2);
 
-            str.AppendLine(MapSolNode.getNodeName(m_node));
+            str.AppendLine(MapSolNode.getNodeValue(m_node));
             str.AppendLine(MapFaction.getFaction(m_faction) + " invasion" + (m_completed ? " (completed)" : ""));
             str.AppendLine("Activation: " + m_activation.ToLocalTime());
 

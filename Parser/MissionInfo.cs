@@ -68,7 +68,7 @@ namespace WarframeWorldStateTest
 		{
 			get
 			{
-				return MapSolNode.getNodeName(m_location);
+				return MapSolNode.getNodeValue(m_location);
 			}
 		}
 		private string m_levelOverride = "";

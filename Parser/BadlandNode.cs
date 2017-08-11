@@ -39,7 +39,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_node);
+                return MapSolNode.getNodeValue(m_node);
                 //return m_node;
             }
         }
@@ -73,7 +73,7 @@ namespace WarframeWorldStateTest
         {
             StringBuilder str = new StringBuilder();
 
-            str.AppendLine(MapSolNode.getNodeName(m_node));
+            str.AppendLine(MapSolNode.getNodeValue(m_node));
             str.AppendLine("Current owner: " + m_defenderInfo.name);
             str.AppendLine("MOTD: " + m_defenderInfo.motd);
 

@@ -87,7 +87,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_victimNode);
+                return MapSolNode.getNodeValue(m_victimNode);
             }
         }
         private string m_node = "";
@@ -102,7 +102,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(node);
+                return MapSolNode.getNodeValue(node);
             }
         }
         private List<int> m_clanGoal = new List<int>();
@@ -304,7 +304,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_rewardNode);
+                return MapSolNode.getNodeValue(m_rewardNode);
             }
         }
         MissionInfo m_missionInfo = new MissionInfo();

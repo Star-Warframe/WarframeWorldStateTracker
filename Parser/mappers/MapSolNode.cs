@@ -25,16 +25,45 @@ namespace WarframeWorldStateTest
             }
         }
 
-        public static string getNodeName(string node) 
+        public static string getNodeValue(string node) 
         {
             try
             {
-                return jobj[node]["value"].ToString();
+                return jobj[node]["name"].ToString() + " (" + jobj[node]["planet"].ToString() + ")";
             } catch (Exception e)
             {
 # if DEBUG
                 Console.WriteLine("MapSolNode: No entry for " + node);
 # endif
+                return node;
+            }
+        }
+
+        public static string getNodeName(string node)
+        {
+            try
+            {
+                return jobj[node]["name"].ToString();
+            } catch (Exception e)
+            {
+#if DEBUG
+                Console.WriteLine("MapSolNode: No entry for " + node);
+#endif
+                return node;
+            }
+        }
+
+        public static string getNodePlanet(string node)
+        {
+            try
+            {
+                return jobj[node]["planet"].ToString();
+            }
+            catch (Exception e)
+            {
+#if DEBUG
+                Console.WriteLine("MapSolNode: No entry for " + node);
+#endif
                 return node;
             }
         }

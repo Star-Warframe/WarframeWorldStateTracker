@@ -64,7 +64,7 @@ namespace WarframeWorldStateTest
             {
                 List<string> returnMe = new List<string>();
                 foreach (string s in m_nodes)
-                    returnMe.Add(MapSolNode.getNodeName(s));
+                    returnMe.Add(MapSolNode.getNodeValue(s));
                 return returnMe;
             }
         }
@@ -96,7 +96,7 @@ namespace WarframeWorldStateTest
             str.AppendLine("Missions: ");
             foreach (string n in m_nodes)
             {
-                str.AppendLine("  " + MapSolNode.getNodeName(n) + " (" + MapSolNode.getNodeEnemy(n) + ")");
+                str.AppendLine("  " + MapSolNode.getNodeValue(n) + " (" + MapSolNode.getNodeEnemy(n) + ")");
             }
 
             return str.ToString();

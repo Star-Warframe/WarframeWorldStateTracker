@@ -23,7 +23,14 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_node);
+                return MapSolNode.getNodeValue(m_node);
+            }
+        }
+        public string missionType
+        {
+            get
+            {
+                return MapSolNode.getNodeType(m_node);
             }
         }
         private bool m_hide = false;

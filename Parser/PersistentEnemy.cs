@@ -86,7 +86,7 @@ namespace WarframeWorldStateTest
         {
             get
             {
-                return MapSolNode.getNodeName(m_lastDiscoveredLocation);
+                return MapSolNode.getNodeValue(m_lastDiscoveredLocation);
             }
         }
         private DateTime m_lastDiscoveredTime = new DateTime();

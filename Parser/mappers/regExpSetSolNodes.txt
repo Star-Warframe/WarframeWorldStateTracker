@@ -1,0 +1,5 @@
+﻿To replace {"value": "NodeName (PlanetName)"} with {"name": "NodeName" "planet": "PlanetName"}:
+Find
+"value"[ ]*:[ ]*"([A-Za-z0-9ö' -]+) \(([A-Za-z ]+)\)",[ ]*\r*\n*
+Replace with
+"name": "$1",\r\n\t"planet": "$2",\r\n
