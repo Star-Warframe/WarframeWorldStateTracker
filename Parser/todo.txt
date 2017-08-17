@@ -1,6 +1,5 @@
 ﻿High priority:
 -- ASP.NET Web app:
-  -- Replace StringBuilders with HtmlTextWriter 
   ?? Kinda sorta in-progress
   ?? Format list items (Alert, Sortie, Invasion, etc.) as tables where necessary (in progress, should look up CSS/general web design stuff to make them prettier)
 	-- Tables are temporary, should make them something else in the future for better formatting options

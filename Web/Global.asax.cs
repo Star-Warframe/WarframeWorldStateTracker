@@ -108,7 +108,7 @@ namespace WorldStateWeb
                 alerts.WriteLine();
 
                 alerts.RenderBeginTag("td");
-                alerts.Write(alert.missionInfo.missionReward.credits + " credits");
+                alerts.Write(alert.missionInfo.missionReward.credits.ToString("N0") + " credits");
                 alerts.RenderEndTag();
                 alerts.WriteLine();
 
@@ -301,7 +301,7 @@ namespace WorldStateWeb
                     voidTraders.WriteLine();
                     //voidTraders.Write("<td>" + t.Item3 + " credits</td>");
                     voidTraders.RenderBeginTag("td");
-                    voidTraders.Write(t.Item3 + " credits");
+                    voidTraders.Write(t.Item3.ToString("N0") + " credits");
                     voidTraders.RenderEndTag();
                     //voidTraders.Write("</tr>");
                 }
