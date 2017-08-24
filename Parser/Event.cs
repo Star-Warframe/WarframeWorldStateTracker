@@ -27,7 +27,6 @@ namespace WarframeWorldStateTest
                 return m_imageUrl;
             }
         }
-
         private bool m_priority = false;
         public bool priority
         {
@@ -44,7 +43,6 @@ namespace WarframeWorldStateTest
                 return m_mobileOnly;
             }
         }
-
         private DateTime m_date = new DateTime();
         public DateTime date
         {
@@ -61,7 +59,14 @@ namespace WarframeWorldStateTest
                 return m_eventStartDate;
             }
         }
-        
+        private DateTime m_eventEndDate = new DateTime();
+        public DateTime eventEndDate
+        {
+            get
+            {
+                return m_eventEndDate;
+            }
+        }
         private Dictionary<string, string> m_messages = new Dictionary<string, string>();
         public Dictionary<string, string> messages
         {
@@ -86,14 +91,11 @@ namespace WarframeWorldStateTest
             // try parse eventStartDate
             if (ev["EventStartDate"] != null)
             {
-                try
-                {
-                    m_eventStartDate = WorldStateHelper.unixTimeToDateTime(ev["EventStartDate"]["$date"]["$numberLong"].ToObject<long>());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Exception while parsing eventStartDate for id: " + m_id);
-                }
+                m_eventStartDate = WorldStateHelper.unixTimeToDateTime(ev["EventStartDate"]["$date"]["$numberLong"].ToObject<long>());
+            }
+            if (ev["EventEndDate"] != null)
+            {
+                m_eventEndDate = WorldStateHelper.unixTimeToDateTime(ev["EventEndDate"]["$date"]["$numberLong"].ToObject<long>());
             }
             // try imageUrl
             if (ev["ImageUrl"] != null)
@@ -123,9 +125,25 @@ namespace WarframeWorldStateTest
                     break;
                 }
             }
+            str.AppendLine(m_prop);
             TimeSpan timeUp = DateTime.UtcNow - m_date;
             str.AppendLine("(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + m_date.ToString());
-            str.AppendLine(m_prop);
+            
+            if (!m_eventStartDate.Equals(new DateTime()) && m_eventStartDate.CompareTo(DateTime.UtcNow) > 0)
+            {
+                TimeSpan tts = DateTime.UtcNow - m_eventStartDate;
+                str.AppendLine("Starts in " + (tts.Days > 0 ? tts.Days + (tts.Days != 1 ? " days, " : " day, ") : "")
+                    + (tts.Hours > 0 ? tts.Hours + (tts.Hours != 1 ? " hours, " : " hour, ") : "")
+                    + tts.Minutes + (tts.Minutes != 1 ? " minutes" : " minute"));
+            }
+
+            if (!m_eventEndDate.Equals(new DateTime()))
+            {
+                TimeSpan tte = m_eventEndDate - DateTime.UtcNow;
+                str.AppendLine("Ends in " + (tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
+                    + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "")
+                    + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+            }
 
             return str.ToString();
         }
@@ -143,8 +161,12 @@ Event: list of objects
 	Date: object
 		$date: object
             $numberLong: long
-    EventStartDate: object?
-        
+    EventStartDate: object (optional):
+		$date: object
+			$numberLong: long
+	EventEndDate: object (optional):
+		$date: object
+			$numberLong: long
 	ImageUrl: string (url)
 	Priority: bool
 	MobileOnly: bool

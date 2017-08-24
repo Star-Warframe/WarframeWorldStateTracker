@@ -10,6 +10,12 @@ Event: list of objects
 	Date: object
 		$date: object
 			$numberLong: long
+	EventStartDate: object (optional):
+		$date: object
+			$numberLong: long
+	EventEndDate: object (optional):
+		$date: object
+			$numberLong: long
 	ImageUrl: string (url)
 	Priority: bool
 	MobileOnly: bool

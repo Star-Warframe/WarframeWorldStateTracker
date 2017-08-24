@@ -260,7 +260,6 @@ namespace WorldStateWeb
         void createVoidTraders()
         {
             voidTraders.Indent = indentLvl;
-            //voidTraders.Write("<tr><th colspan=\"3\">");
             voidTraders.RenderBeginTag("tr");
             voidTraders.AddAttribute(HtmlTextWriterAttribute.Colspan, "3");
             voidTraders.RenderBeginTag("th");
@@ -282,28 +281,22 @@ namespace WorldStateWeb
                 voidTraders.Write((tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
                     + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "")
                     + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
-                //voidTraders.Write("</th></tr>");
                 voidTraders.RenderEndTag();
                 voidTraders.RenderEndTag();
                 foreach(Tuple<string, int, int> t in v.manifest)
                 {
-                    //voidTraders.Write("<tr>");
                     voidTraders.RenderBeginTag("tr");
-                    //voidTraders.Write("<td>" + t.Item1 + "</td>");
                     voidTraders.RenderBeginTag("td");
                     voidTraders.Write(t.Item1);
                     voidTraders.RenderEndTag();
                     voidTraders.WriteLine();
-                    //voidTraders.Write("<td>" + t.Item2 + " ducats</td>");
                     voidTraders.RenderBeginTag("td");
                     voidTraders.Write(t.Item2 + " ducats");
                     voidTraders.RenderEndTag();
                     voidTraders.WriteLine();
-                    //voidTraders.Write("<td>" + t.Item3 + " credits</td>");
                     voidTraders.RenderBeginTag("td");
                     voidTraders.Write(t.Item3.ToString("N0") + " credits");
                     voidTraders.RenderEndTag();
-                    //voidTraders.Write("</tr>");
                 }
             }
             // if inactive, say as much and show location, arrival time
@@ -394,13 +387,31 @@ namespace WorldStateWeb
                         message = m.Value;
                     }
                 }
-                events.RenderBeginTag("p");
-                events.Write("(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + message);
-                events.RenderEndTag();
                 events.AddAttribute(HtmlTextWriterAttribute.Href, e.prop);
                 events.RenderBeginTag("a");
                 events.Write(e.prop);
                 events.RenderEndTag();
+                events.RenderBeginTag("p");
+                events.Write("(" + timeUp.Days + (timeUp.Days != 1 ? " days ago) " : " day ago) ") + message);
+                events.RenderEndTag();
+                if (!e.eventStartDate.Equals(new DateTime()) && e.eventStartDate.CompareTo(DateTime.UtcNow) > 0)
+                {
+                    TimeSpan tts = DateTime.UtcNow - e.eventStartDate;
+                    events.RenderBeginTag("p");
+                    events.Write("Starts in " + (tts.Days > 0 ? tts.Days + (tts.Days != 1 ? " days, " : " day, ") : "")
+                        + (tts.Hours > 0 ? tts.Hours + (tts.Hours != 1 ? " hours, " : " hour, ") : "")
+                        + tts.Minutes + (tts.Minutes != 1 ? " minutes" : " minute"));
+                    events.RenderEndTag();
+                }
+                if (!e.eventEndDate.Equals(new DateTime()))
+                {
+                    TimeSpan tte = e.eventEndDate - DateTime.UtcNow;
+                    events.RenderBeginTag("p");
+                    events.Write("Ends in " + (tte.Days > 0 ? tte.Days + (tte.Days != 1 ? " days, " : " day, ") : "")
+                        + (tte.Hours > 0 ? tte.Hours + (tte.Hours != 1 ? " hours, " : " hour, ") : "")
+                        + tte.Minutes + (tte.Minutes != 1 ? " minutes" : " minute"));
+                    events.RenderEndTag();
+                }
                 events.RenderEndTag();
             }
         }
