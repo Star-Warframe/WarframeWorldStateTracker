@@ -36,8 +36,6 @@ Low priority:
 
 -- Refactor mappers to be a single class, maybe
 
--- Redo solNodes.json so that the node name and planet are separate values
-
 Done:
 xx Add Stalkerlyte data structure
 xx Figure out how to populate the form on comboBox1 changes (to actually get data into a visible state)
@@ -64,6 +62,7 @@ xx Add tag and description for Gift of the Lotus and Design Council Challenge al
 xx Add an option to read WorldState from a file, for testing purposes
   xx Also added an option to disable auto-updating every minute for Desktop app
 xx Move some of the code from Default.aspx.cs to application level
+xx Redo solNodes.json so that the node name and planet are separate values
 
 In limbo:
 ?? (see MapResource.cs) merge languages.json and resourcesData.json and get rid of the jobj2 workaround
