@@ -169,6 +169,7 @@ ul.pvp-list > li:first-child {
 .content-wrapper {
     margin: 0 auto;
     max-width: 1200px;
+    overflow: hidden;
 }
 
 #body {

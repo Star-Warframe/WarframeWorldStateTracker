@@ -329,7 +329,7 @@ namespace WarframeWorldStateTest
         public void getWorldState()
         {
             worldStatePhpString = getWorldStateString();
-            worldStatePhpJson = JObject.Parse(worldStatePhpString);
+            if (!worldStatePhpString.Equals("")) { worldStatePhpJson = JObject.Parse(worldStatePhpString); } // TODO catch error if can't get worldState string for whatever reason (unable to connect to content.warframe, broken string, etc.)
         }
 
         private void clearAll()
@@ -644,7 +644,7 @@ namespace WarframeWorldStateTest
                 str = wcli.DownloadString(wsUrl);
             } catch (System.Net.WebException e)
             {
-                str = "Could not retrieve worldState.php";
+                Console.WriteLine("Could not retrieve worldState.php");
             }
             return str;
         }

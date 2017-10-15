@@ -47,7 +47,7 @@ namespace WorldStateWeb
                         wsdata = wsdataCpy;
                         createHtml();
 
-                        Thread.Sleep(60000);    // refresh wsdata on a 1-minute interval
+                        Thread.Sleep(10000);    // refresh wsdata on a 10-second interval
                         // possible issue of trying to request page during the x milliseconds wsdata is being refreshed
                         // solved by using a copy and assigning to it?
                     }
@@ -396,7 +396,7 @@ namespace WorldStateWeb
                 events.RenderEndTag();
                 if (!e.eventStartDate.Equals(new DateTime()) && e.eventStartDate.CompareTo(DateTime.UtcNow) > 0)
                 {
-                    TimeSpan tts = DateTime.UtcNow - e.eventStartDate;
+                    TimeSpan tts = e.eventStartDate - DateTime.UtcNow;
                     events.RenderBeginTag("p");
                     events.Write("Starts in " + (tts.Days > 0 ? tts.Days + (tts.Days != 1 ? " days, " : " day, ") : "")
                         + (tts.Hours > 0 ? tts.Hours + (tts.Hours != 1 ? " hours, " : " hour, ") : "")

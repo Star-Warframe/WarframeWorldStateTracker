@@ -75,7 +75,7 @@
 	"name": "Elion",
 	"planet": "Mercury",
 	"enemy": "Grineer",
-	"type" : "Mobile Defense"
+	"type" : "Capture"
   }
   , "SolNode13": {
 	"name": "Bianca",
@@ -86,7 +86,7 @@
   , "SolNode14": {
 	"name": "Ultor",
 	"planet": "Mars",
-	"enemy": "Crossfire",
+	"enemy": "Crossfire Grineer vs. Corpus",
 	"type" : "Exterminate"
   }
   , "SolNode15": {
@@ -98,8 +98,8 @@
   , "SolNode16": {
 	"name": "Augustus",
 	"planet": "Mars",
-	"enemy": "Crossfire",
-	"type" : "Rescue"
+	"enemy": "Grineer",
+	"type" : "Excavation"
   }
   , "SolNode17": {
 	"name": "Proteus",
@@ -165,13 +165,13 @@
 	"name": "E Prime",
 	"planet": "Earth",
 	"enemy": "Grineer",
-	"type" : "Sabotage"
+	"type" : "Exterminate"
   }
   , "SolNode28": {
 	"name": "M Prime",
 	"planet": "Mercury",
-	"enemy": "Grineer",
-	"type" : "Sabotage"
+	"enemy": "Crossfire Grineer vs. Infested",
+	"type" : "Exterminate"
   }
   , "SolNode29": {
 	"name": "Oberon",
@@ -201,7 +201,7 @@
 	"name": "Ariel",
 	"planet": "Uranus",
 	"enemy": "Grineer",
-	"type" : "Sabotage"
+	"type" : "Capture"
   }
   , "SolNode34": {
 	"name": "Sycorax",
@@ -219,7 +219,7 @@
 	"name": "Martialis",
 	"planet": "Mars",
 	"enemy": "Grineer",
-	"type" : "Excavation"
+	"type" : "Rescue"
   }
   , "SolNode37": {
 	"name": "Pallene",
@@ -237,7 +237,7 @@
 	"name": "Everest",
 	"planet": "Earth",
 	"enemy": "Grineer",
-	"type" : "Exterminate"
+	"type" : "Excavation"
   }
   , "SolNode40": {
 	"name": "Prospero",
@@ -248,7 +248,7 @@
   , "SolNode41": {
 	"name": "Arval",
 	"planet": "Mars",
-	"enemy": "Crossfire",
+	"enemy": "Grineer",
 	"type" : "Spy"
   }
   , "SolNode42": {
@@ -453,7 +453,7 @@
 	"name": "Cervantes",
 	"planet": "Earth",
 	"enemy": "Grineer",
-	"type" : "Excavation"
+	"type" : "Sabotage"
   }
   , "SolNode76": {
 	"name": "Hydra",
@@ -531,7 +531,7 @@
 	"name": "Adrastea",
 	"planet": "Jupiter",
 	"enemy": "Corpus",
-	"type" : "Spy"
+	"type" : "Sabotage"
   }
   , "SolNode89": {
 	"name": "Mariana",
@@ -566,7 +566,7 @@
   , "SolNode94": {
 	"name": "Apollodorus",
 	"planet": "Mercury",
-	"enemy": "Grineer",
+	"enemy": "Infested",
 	"type" : "Survival"
   }
   , "SolNode95": {
@@ -585,13 +585,13 @@
 	"name": "Amalthea",
 	"planet": "Jupiter",
 	"enemy": "Corpus",
-	"type" : "Sabotage"
+	"type" : "Spy"
   }
   , "SolNode98": {
 	"name": "Desdemona",
 	"planet": "Uranus",
 	"enemy": "Grineer",
-	"type" : "Capture"
+	"type" : "Sabotage"
   }
   , "SolNode99": {
 	"name": "War",
@@ -620,7 +620,7 @@
   , "SolNode103": {
 	"name": "Terminus",
 	"planet": "Mercury",
-	"enemy": "Grineer",
+	"enemy": "Crossfire Grineer vs. Infested",
 	"type" : "Capture"
   }
   , "SolNode104": {
@@ -735,13 +735,13 @@
 	"name": "Stephano",
 	"planet": "Uranus",
 	"enemy": "Grineer",
-	"type" : "Interception"
+	"type" : "Defense"
   }
   , "SolNode123": {
 	"name": "V Prime",
 	"planet": "Venus",
 	"enemy": "Corpus",
-	"type" : "Capture"
+	"type" : "Survival"
   }
   , "SolNode124": {
 	"name": "Trinculo",
@@ -782,7 +782,7 @@
   , "SolNode130": {
 	"name": "Lares",
 	"planet": "Mercury",
-	"enemy": "Grineer",
+	"enemy": "Infested",
 	"type" : "Defense"
   }
   , "SolNode131": {
@@ -1001,7 +1001,7 @@
 	"name": "Oestrus",
 	"planet": "Eris",
 	"enemy": "Infested",
-	"type" : "Mobile Defense"
+	"type" : "Infested Salvage"
   }
   , "SolNode168": {
 	"name": "Phalan",
@@ -1121,7 +1121,7 @@
 	"name": "Selkie",
 	"planet": "Sedna",
 	"enemy": "Grineer",
-	"type" : "Ancient Retribution"
+	"type" : "Survival"
   }
   , "SolNode188": {
 	"name": "Kelpie",
@@ -1222,14 +1222,14 @@
   , "SolNode204": {
 	"name": "Armaros",
 	"planet": "Europa",
-	"enemy": "Corpus",
+	"enemy": "Crossfire Corpus vs. Infested",
 	"type" : "Exterminate"
   }
   , "SolNode205": {
 	"name": "Baal",
 	"planet": "Europa",
 	"enemy": "Corpus",
-	"type" : "Mobile Defense"
+	"type" : "Exterminate"
   }
   , "SolNode206": {
 	"name": "Eligor",
@@ -1251,7 +1251,7 @@
 	"name": "Morax",
 	"planet": "Europa",
 	"enemy": "Corpus",
-	"type" : "Exterminate"
+	"type" : "Mobile Defense"
   }
   , "SolNode210": {
 	"name": "Naamah",
@@ -1284,7 +1284,7 @@
   , "SolNode215": {
 	"name": "Valac",
 	"planet": "Europa",
-	"enemy": "Corpus",
+	"enemy": "Crossfire Grineer vs. Corpus",
 	"type" : "Spy"
   }
   , "SolNode216": {
@@ -1297,7 +1297,7 @@
 	"name": "Orias",
 	"planet": "Europa",
 	"enemy": "Corpus",
-	"type" : "Ancient Retribution"
+	"type" : "Rescue"
   }
   , "SolNode218": {
 	"name": "Zagan",
@@ -1332,8 +1332,8 @@
   , "SolNode223": {
 	"name": "Boethius",
 	"planet": "Mercury",
-	"enemy": "Grineer",
-	"type" : "Exterminate"
+	"enemy": "Infested",
+	"type" : "Mobile Defense"
   }
   , "SolNode224": {
 	"name": "Odin",
@@ -1382,10 +1382,10 @@
 	"type" : "Mobile Defense"
   }
   , "SolNode404" : {
-	"name": "Striborg",
+	"name": "Stribog",
 	"planet": "Void",
 	"enemy": "Corrupted",
-	"type" : "Orokin Sabotage"
+	"type" : "Sabotage"
   }
   , "SolNode405" : {
 	"name": "Ani",
@@ -1433,7 +1433,7 @@
 	"name": "Mithra",
 	"planet": "Void",
 	"enemy": "Corrupted",
-	"type" : "Ancient Retribution"
+	"type" : "Interception"
   }
   , "SolNode413" : {
 	"name": "SolNode413",
@@ -1540,7 +1540,7 @@
   , "SolNode300" : {
 	"name": "Plato",
 	"planet": "Lua",
-	"enemy" : "Grineer",
+	"enemy" : "Crossfire Corpus vs. Grineer",
 	"type" : "Exterminate"
   }
   , "SolNode301" : {
@@ -1559,18 +1559,18 @@
 	"name": "Copernicus",
 	"planet": "Lua",
 	"enemy": "Grineer",
-	"type" : "Mobile Defense"
+	"type" : "Capture"
   }
   , "SolNode305" : {
 	"name": "Stöfler",
 	"planet": "Lua",
 	"enemy" : "Corpus",
-	"type" : "Survival"
+	"type" : "Defense"
   }
   , "SolNode306" : {
 	"name": "Pavlov",
 	"planet": "Lua",
-	"enemy" : "Corpus",
+	"enemy" : "Crossfire Grineer vs. Corpus",
 	"type" : "Spy"
   }
   , "SolNode307" : {
@@ -1702,7 +1702,7 @@
   , "MercuryHUB": {
 	"name": "Larunda Relay",
 	"planet": "Mercury",
-	"enemy": "Grineer",
+	"enemy": "Tenno",
 	"type" : "Relay"
   }
   , "VenusHUB": {
@@ -1748,7 +1748,7 @@
 	"type" : "Relay"
   }
   , "EventNode0": {
-	"name": "Balor",
+	"name": "Fomorian/Razorback",
 	"planet": "",
 	"enemy": "Sentient",
 	"type" : "Ancient Retribution"
@@ -2051,7 +2051,7 @@
 	"name": "Memphis",
 	"planet": "Phobos",
 	"enemy": "Infested",
-	"type" : "Dark Sector Defense"
+	"type" : "Dark Sector Defection"
   }
   , "ClanNode11": {
 	"name": "Zeugma",
@@ -2063,7 +2063,7 @@
 	"name": "Caracol",
 	"planet": "Saturn",
 	"enemy": "Infested",
-	"type" : "Dark Sector Defense"
+	"type" : "Dark Sector Defection"
   }
   , "ClanNode13": {
 	"name": "Piscinas",
@@ -2093,7 +2093,7 @@
 	"name": "Assur",
 	"planet": "Uranus",
 	"enemy": "Infested",
-	"type" : "Dark Sector Sabotage"
+	"type" : "Dark Sector Survival"
   }
   , "ClanNode18": {
 	"name": "Akkad",
@@ -2111,7 +2111,7 @@
 	"name": "Yursa",
 	"planet": "Neptune",
 	"enemy": "Infested",
-	"type" : "Dark Sector Defense"
+	"type" : "Dark Sector Defection"
   }
   , "ClanNode21": {
 	"name": "Kelashin",
